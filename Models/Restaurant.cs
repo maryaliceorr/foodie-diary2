@@ -8,7 +8,7 @@ namespace FoodieDiary2.Models
     public class Restaurant
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string RestaurantName { get; set; }
         public string Notes { get; set; }
         public bool OpenStatus { get; set; }
         public string Address { get; set; }

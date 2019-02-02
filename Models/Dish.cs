@@ -22,5 +22,12 @@ namespace FoodieDiary2.Models
         public int Taste { get; set; }
         public int TotalScore { get; set; }
         public string Picture { get; set; }
+        public string MealName { get; set; }
+        public DateTime Date { get; set; }
+        public string RestaurantName { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string FoodGenreName { get; set; }
+
     }
 }

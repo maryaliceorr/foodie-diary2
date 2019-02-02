@@ -3,7 +3,7 @@ import { Col, Row, Icon, Input } from 'react-materialize';
 
 export class MakeAMeal extends Component {
 
-    render(ls
+    render(
 
     ) {
         return (
