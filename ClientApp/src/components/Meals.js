@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import mealsCall from '../DBRequests/mealCalls';
-import { Col, Card, Button } from 'react-materialize';
+import { Panel, Button, Col, Row } from 'react-bootstrap';
+import "./Meals.css";
 
 export class Meals extends Component {
 
@@ -21,20 +22,28 @@ export class Meals extends Component {
 
     render() {
         const meals = this.state.meals.map((meal) => {
-            return (
-                <div key={meal.id}>
-                    <Col m={3} s={12}>
-                        <Card className='blue-grey darken-1' textClassName='white-text' title={meal.mealName} actions={[<Button waves='light'>View Meal</Button>]}>
-                            <h3>{meal.restaurantName}</h3>
-                            <h4>{meal.city}, {meal.state}</h4>
-    </Card>
+            return (  
+                    <Col xs={12} md={4}>
+                        <div key={meal.id}>
+                            <Panel bsStyle="primary">
+                                <Panel.Heading>
+                                    <Panel.Title componentClass="h3">{meal.mealName}</Panel.Title>
+                                </Panel.Heading>
+                                <Panel.Body>
+                                    <h3>{meal.restaurantName}</h3>
+                                    <h4>{meal.city}, {meal.state}</h4>
+                                    <Button variant="primary">View Meal</Button>
+                                </Panel.Body>
+                            </Panel>
+                        </div>
                     </Col>
-                </div>
-                );
+             );
         })
         return (
             <div>
-                {meals}
+                <Row className="show-grid">
+                    {meals}
+                </Row>
             </div>
         );
     }
