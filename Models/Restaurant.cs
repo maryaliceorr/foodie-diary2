@@ -13,7 +13,8 @@ namespace FoodieDiary2.Models
         public bool OpenStatus { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
+        public string StateAbbr { get; set; }
+        public int StateAbbrId { get; set; }
         public int ZipCode { get; set; }
         public Decimal Longitude { get; set; }
         public Decimal Latitude { get; set; }

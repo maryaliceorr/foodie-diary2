@@ -31,7 +31,7 @@ namespace FoodieDiary2.DataAccess
 	                                                           C.CourseName, 
 	                                                           R.RestaurantName,
 	                                                           R.City,
-	                                                           R.State,
+	                                                           SA.StateAbbr,
 	                                                           FG.FoodGenreName
                                                         FROM Dish D
                                                         LEFT JOIN Course C
@@ -43,7 +43,9 @@ namespace FoodieDiary2.DataAccess
                                                         JOIN Restaurant R
                                                         ON M.RestaurantId = R.Id
                                                         JOIN FoodGenre FG
-                                                        ON R.FoodGenreId = FG.Id");
+                                                        ON R.FoodGenreId = FG.Id
+                                                        LEFT JOIN StateAbbr SA
+                                                        ON R.StateAbbrId = SA.Id");
 
                 return result.ToList();
             }
@@ -62,7 +64,7 @@ namespace FoodieDiary2.DataAccess
 	                                                           C.CourseName, 
 	                                                           R.RestaurantName,
 	                                                           R.City,
-	                                                           R.State,
+	                                                           SA.StateAbbr,
 	                                                           FG.FoodGenreName
                                                         FROM Dish D
                                                         LEFT JOIN Course C
@@ -75,6 +77,8 @@ namespace FoodieDiary2.DataAccess
                                                         ON M.RestaurantId = R.Id
                                                         JOIN FoodGenre FG
                                                         ON R.FoodGenreId = FG.Id
+                                                        LEFT JOIN StateAbbr SA
+                                                        ON R.StateABbrId = SA.Id
                                                         WHERE D.Id = @id", new { id });
                 return result;
 
@@ -87,11 +91,22 @@ namespace FoodieDiary2.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<Dish>(@"SELECT Id,
-                                                        TOP 10 Aroma, 
-                                                        DishName
-                                                        FROM Dish
-                                                        ORDER BY Aroma DESC");
+                var result = connection.Query<Dish>(@"SELECT TOP 10 D.Aroma,
+				                                                    D.Id, 
+				                                                    D.DishName,
+				                                                    D.Description,
+				                                                    D.Picture, 
+				                                                    R.RestaurantName,
+				                                                    R.City, 
+				                                                    SA.StateAbbr
+				                                                    FROM Dish D
+				                                                    JOIN MEAL M
+				                                                    ON D.Mealid = M.Id
+				                                                    JOIN Restaurant R
+				                                                    ON M.RestaurantId = R.Id
+                                                                    LEFT JOIN StateAbbr SA
+                                                                    ON R.StateABbrId = SA.Id
+				                                                    ORDER BY Aroma DESC");
 
                 return result.ToList();
             }
@@ -103,10 +118,22 @@ namespace FoodieDiary2.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<Dish>(@"SELECT TOP 10 Appearance, 
-                                                        Id 
-                                                        FROM Dish
-                                                        ORDER BY Appearance DESC");
+                var result = connection.Query<Dish>(@"SELECT TOP 10 D.Appearance,
+				                                                    D.Id, 
+				                                                    D.DishName,
+				                                                    D.Description,
+				                                                    D.Picture, 
+				                                                    R.RestaurantName,
+				                                                    R.City, 
+				                                                    SA.StateAbbr
+				                                                    FROM Dish D
+				                                                    JOIN MEAL M
+				                                                    ON D.Mealid = M.Id
+				                                                    JOIN Restaurant R
+				                                                    ON M.RestaurantId = R.Id
+                                                                    LEFT JOIN StateAbbr SA
+                                                                    ON R.StateABbrId = SA.Id
+				                                                    ORDER BY Appearance DESC");
 
                 return result.ToList();
             }
@@ -118,10 +145,22 @@ namespace FoodieDiary2.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<Dish>(@"SELECT TOP 10 Creativity, 
-                                                        Id 
-                                                        FROM Dish
-                                                        ORDER BY Creativity DESC");
+                var result = connection.Query<Dish>(@"SELECT TOP 10 D.Creativity,
+				                                                    D.Id, 
+				                                                    D.DishName,
+				                                                    D.Description,
+				                                                    D.Picture, 
+				                                                    R.RestaurantName,
+				                                                    R.City, 
+				                                                    SA.StateAbbr
+				                                                    FROM Dish D
+				                                                    JOIN MEAL M
+				                                                    ON D.Mealid = M.Id
+				                                                    JOIN Restaurant R
+				                                                    ON M.RestaurantId = R.Id
+                                                                    LEFT JOIN StateAbbr SA
+                                                                    ON R.StateABbrId = SA.Id
+				                                                    ORDER BY Creativity DESC");
 
                 return result.ToList();
             }
@@ -133,10 +172,22 @@ namespace FoodieDiary2.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<Dish>(@"SELECT TOP 10 Taste, 
-                                                        Id 
-                                                        FROM Dish
-                                                        ORDER BY Taste DESC");
+                var result = connection.Query<Dish>(@"SELECT TOP 10 D.Taste,
+				                                                    D.Id, 
+				                                                    D.DishName,
+				                                                    D.Description,
+				                                                    D.Picture, 
+				                                                    R.RestaurantName,
+				                                                    R.City, 
+				                                                    SA.StateAbbr
+				                                                    FROM Dish D
+				                                                    JOIN MEAL M
+				                                                    ON D.Mealid = M.Id
+				                                                    JOIN Restaurant R
+				                                                    ON M.RestaurantId = R.Id
+                                                                    LEFT JOIN StateAbbr SA
+                                                                    ON R.StateABbrId = SA.Id
+				                                                    ORDER BY Taste DESC");
 
                 return result.ToList();
             }
@@ -148,10 +199,22 @@ namespace FoodieDiary2.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<Dish>(@"SELECT TOP 10 TotalScore, 
-                                                        Id 
-                                                        FROM Dish
-                                                        ORDER BY TotalScore DESC");
+                var result = connection.Query<Dish>(@"SELECT TOP 10 D.TotalScore,
+				                                                    D.Id, 
+				                                                    D.DishName,
+				                                                    D.Description,
+				                                                    D.Picture, 
+				                                                    R.RestaurantName,
+				                                                    R.City, 
+				                                                    SA.StateAbbr
+				                                                    FROM Dish D
+				                                                    JOIN MEAL M
+				                                                    ON D.Mealid = M.Id
+				                                                    JOIN Restaurant R
+				                                                    ON M.RestaurantId = R.Id
+                                                                    LEFT JOIN StateAbbr SA
+                                                                    ON R.StateABbrId = SA.Id
+				                                                    ORDER BY TotalScore DESC");
 
                 return result.ToList();
             }
