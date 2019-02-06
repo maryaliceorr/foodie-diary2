@@ -32,5 +32,35 @@ namespace FoodieDiary2.Controllers
             return Ok(_dishStorage.GetDishById(id));
         }
 
+        [HttpGet("/aroma")]
+        public IActionResult GetDishByAroma()
+        {
+            return Ok(_dishStorage.GetDishByAroma());
+        }
+
+        [HttpGet("/appearance")]
+        public IActionResult GetDishByAppearance()
+        {
+            return Ok(_dishStorage.GetDishByAppearance());
+        }
+
+        [HttpGet("/creativity")]
+        public IActionResult GetDishByCreativity()
+        {
+            return Ok(_dishStorage.GetDishByCreativity());
+        }
+
+        [HttpGet("/taste")]
+        public IActionResult GetDishByTaste()
+        {
+            return Ok(_dishStorage.GetDishByTaste());
+        }
+
+        [HttpGet("/totalscore")]
+        public IActionResult GetDishByTotalScore()
+        {
+            return Ok(_dishStorage.GetDishByTotalScore());
+        }
+
     }
 }
