@@ -31,7 +31,7 @@ export class Meals extends Component {
                                 </Panel.Heading>
                                 <Panel.Body>
                                     <h3>{meal.restaurantName}</h3>
-                                    <h4>{meal.city}, {meal.state}</h4>
+                                    <h4>{meal.city}, {meal.stateAbbr}</h4>
                                     <Button variant="primary">View Meal</Button>
                                 </Panel.Body>
                             </Panel>

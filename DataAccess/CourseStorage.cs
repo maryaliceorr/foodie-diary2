@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace FoodieDiary2.DataAccess
 {
-    public class RestaurantStorage
+    public class CourseStorage
     {
         private readonly string ConnectionString;
 
-        public RestaurantStorage(IConfiguration config)
+        public CourseStorage(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        public List<Restaurant> GetRestaurants()
+        public List<Course> GetCourses()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<Restaurant>(@"SELECT * FROM Restaurant");
+                var result = connection.Query<Course>(@"SELECT * FROM Course");
 
                 return result.ToList();
             }

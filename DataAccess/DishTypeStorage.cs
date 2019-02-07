@@ -9,26 +9,25 @@ using System.Threading.Tasks;
 
 namespace FoodieDiary2.DataAccess
 {
-    public class RestaurantStorage
+    public class DishTypeStorage
     {
         private readonly string ConnectionString;
 
-        public RestaurantStorage(IConfiguration config)
+        public DishTypeStorage(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        public List<Restaurant> GetRestaurants()
+        public List<DishType> GetDishTypes()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<Restaurant>(@"SELECT * FROM Restaurant");
+                var result = connection.Query<DishType>(@"SELECT * FROM DishType");
 
                 return result.ToList();
             }
         }
-
     }
 }

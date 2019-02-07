@@ -70,7 +70,7 @@ export class Home extends Component {
                             <img className="card-image" src={aromaDish.picture} />
                             <h4>Aroma Score: {aromaDish.aroma}</h4>
                             <h5>{aromaDish.restaurantName}</h5>
-                            <h6>{aromaDish.city}, {aromaDish.state}</h6>
+                            <h6>{aromaDish.city}, {aromaDish.stateAbbr}</h6>
                             <Button bsStyle="info">View Dish</Button>
                         </Panel.Body>
                     </Panel>
@@ -89,7 +89,7 @@ export class Home extends Component {
                             <img className="card-image" src={appearanceDish.picture} />
                             <h4>Appearance Score: {appearanceDish.appearance}</h4>
                             <h5>{appearanceDish.restaurantName}</h5>
-                            <h6>{appearanceDish.city}, {appearanceDish.state}</h6>
+                            <h6>{appearanceDish.city}, {appearanceDish.stateAbbr}</h6>
                             <Button bsStyle="info">View Dish</Button>
                         </Panel.Body>
                     </Panel>
@@ -108,7 +108,7 @@ export class Home extends Component {
                             <img className="card-image" src={creativityDish.picture} />
                             <h4>Creativity Score: {creativityDish.creativity}</h4>
                             <h5>{creativityDish.restaurantName}</h5>
-                            <h6>{creativityDish.city}, {creativityDish.state}</h6>
+                            <h6>{creativityDish.city}, {creativityDish.stateAbbr}</h6>
                             <Button bsStyle="info">View Dish</Button>
                         </Panel.Body>
                             </Panel>
@@ -127,7 +127,7 @@ export class Home extends Component {
                             <img className="card-image" src={tasteDish.picture} />
                             <h4>Taste Score: {tasteDish.taste}</h4>
                             <h5>{tasteDish.restaurantName}</h5>
-                            <h6>{tasteDish.city}, {tasteDish.state}</h6>
+                            <h6>{tasteDish.city}, {tasteDish.stateAbbr}</h6>
                             <Button bsStyle="info">View Dish</Button>
                         </Panel.Body>   
                     </Panel>
@@ -147,7 +147,7 @@ export class Home extends Component {
                             <img className="card-image" src={totalScoreDish.picture} />
                             <h4>Total Score: {totalScoreDish.totalScore}</h4>
                             <h5>{totalScoreDish.restaurantName}</h5>
-                            <h6>{totalScoreDish.city}, {totalScoreDish.state}</h6>
+                            <h6>{totalScoreDish.city}, {totalScoreDish.stateAbbr}</h6>
                             <Button bsStyle="info">View Dish</Button>
                         </Panel.Body>
                     </Panel>

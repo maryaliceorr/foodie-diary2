@@ -11,19 +11,20 @@ namespace FoodieDiary2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurantController : ControllerBase
+    public class FoodGenreController : ControllerBase
     {
-        private RestaurantStorage _restaurantStorage;
+        private FoodGenreStorage _foodGenreStorage;
 
-        public RestaurantController(IConfiguration config)
+        public FoodGenreController(IConfiguration config)
         {
-            _restaurantStorage = new RestaurantStorage(config);
+            _foodGenreStorage = new FoodGenreStorage(config);
         }
 
-        [HttpGet("restaurantstatics")]
-        public IActionResult GetRestaurants()
+        [HttpGet("")]
+        public IActionResult GetFoodGenres()
         {
-            return Ok(_restaurantStorage.GetRestaurants());
+            return Ok(_foodGenreStorage.GetFoodGenres());
         }
+
     }
 }

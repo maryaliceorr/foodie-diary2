@@ -26,7 +26,7 @@ namespace FoodieDiary2.Models
         public DateTime Date { get; set; }
         public string RestaurantName { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
+        public string StateAbbr { get; set; }
         public string FoodGenreName { get; set; }
 
     }
