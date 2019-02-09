@@ -1,10 +1,10 @@
 ﻿import axios from 'axios';
 
-const postRestaurant = (restaurant) => {
+const postDish = (dish) => {
     return new Promise((resolve, reject) => {
-        console.log(restaurant);
+        console.log(dish);
         axios
-            .post(`/api/restaurant/addrestaurant`, restaurant)
+            .post(`/api/restaurant/adddish`, dish)
             .then((res) => {
                 resolve(res.data);
             })
@@ -14,4 +14,4 @@ const postRestaurant = (restaurant) => {
     })
 };
 
-export default { postRestaurant };
+export default { postDish };

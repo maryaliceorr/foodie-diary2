@@ -30,5 +30,21 @@ namespace FoodieDiary2.DataAccess
             }
         }
 
+        public bool Add(Restaurant restaurant)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.Execute(@"insert into [dbo].[Restaurant]( [RestaurantName], [Notes], [OpenStatus], [Address], [City], [ZipCode],[FoodGenreId], [Telephone], [Website], [StateAbbrId])
+                   values( @RestaurantName, @Notes, @OpenStatus, @Address, @City, @ZipCode, @FoodGenreId, @Telephone, @Website, @StateAbbrId)", restaurant);
+
+                return result == 1;
+            }
+        }
+
+
+
+
     }
 }

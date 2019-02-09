@@ -20,7 +20,7 @@ namespace FoodieDiary2.Models
         public int Appearance { get; set; }
         public int Creativity { get; set; }
         public int Taste { get; set; }
-        public int TotalScore { get; set; }
+        public decimal TotalScore { get; set; }
         public string Picture { get; set; }
         public string MealName { get; set; }
         public DateTime Date { get; set; }
