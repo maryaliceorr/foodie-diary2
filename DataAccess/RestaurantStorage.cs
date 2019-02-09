@@ -18,22 +18,33 @@ namespace FoodieDiary2.DataAccess
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        public List<Restaurant> GetStates()
+        public List<Restaurant> GetRestaurants()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<Restaurant>(@"SELECT R.Id,
-		                                                        SA.StateAbbr
-                                                        FROM Restaurant R
-                                                        RIGHT JOIN StateAbbr SA
-                                                        ON R.StateAbbrId = SA.Id
-                                                        ORDER BY SA.StateAbbr ASC");
+                var result = connection.Query<Restaurant>(@"SELECT * FROM Restaurant");
 
                 return result.ToList();
             }
         }
+
+        public int Add(Restaurant restaurant)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.QueryFirst<int>(@"insert into [dbo].[Restaurant]( [RestaurantName], [Notes], [OpenStatus], [Address], [City], [ZipCode],[FoodGenreId], [Telephone], [Website], [StateAbbrId])
+                   values( @RestaurantName, @Notes, @OpenStatus, @Address, @City, @ZipCode, @FoodGenreId, @Telephone, @Website, @StateAbbrId); SELECT SCOPE_IDENTITY()", restaurant);
+
+                return result;
+            }
+        }
+
+
+
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FoodieDiary2.DataAccess;
+using FoodieDiary2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,12 @@ namespace FoodieDiary2.Controllers
         public IActionResult GetDishes()
         {
             return Ok(_dishStorage.GetDishes());
+        }
+
+        [HttpGet("dishestable")]
+        public IActionResult GetDishesTable()
+        {
+            return Ok(_dishStorage.GetDishesTable());
         }
 
         [HttpGet("{id:int}")]
@@ -60,6 +67,13 @@ namespace FoodieDiary2.Controllers
         public IActionResult GetDishByTotalScore()
         {
             return Ok(_dishStorage.GetDishByTotalScore());
+        }
+
+        [HttpPost("adddish")]
+        public IActionResult AddDish([FromBody] Dish dish)
+
+        {
+            return Ok(_dishStorage.Add(dish));
         }
 
     }

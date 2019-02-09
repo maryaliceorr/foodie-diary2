@@ -8,6 +8,7 @@ namespace FoodieDiary2.Models
     public class Dish
     {
         public int Id { get; set; }
+        public int MealId { get; set; }
         public string DishName { get; set; }
         public string DishTypeName { get; set; }
         public int DishTypeId { get; set; }
@@ -20,13 +21,13 @@ namespace FoodieDiary2.Models
         public int Appearance { get; set; }
         public int Creativity { get; set; }
         public int Taste { get; set; }
-        public int TotalScore { get; set; }
+        public decimal TotalScore { get; set; }
         public string Picture { get; set; }
         public string MealName { get; set; }
         public DateTime Date { get; set; }
         public string RestaurantName { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
+        public string StateAbbr { get; set; }
         public string FoodGenreName { get; set; }
 
     }

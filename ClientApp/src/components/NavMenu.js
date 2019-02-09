@@ -17,10 +17,10 @@ export class NavMenu extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
+          <Nav pullRight>
             <LinkContainer to={'/'} exact>
               <NavItem>
-                <Glyphicon glyph='home' /> Home
+                 Home
               </NavItem>
             </LinkContainer>
             <LinkContainer to={'/makeameal'}>
@@ -28,11 +28,11 @@ export class NavMenu extends Component {
                 Make A Meal
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/meals'}>
+            <LinkContainer to={'/mymeals'}>
               <NavItem>
-                <Glyphicon glyph='th-list' /> Meals
+                My Meals
               </NavItem>
-            </LinkContainer>
+              </LinkContainer> 
           </Nav>
         </Navbar.Collapse>
       </Navbar>

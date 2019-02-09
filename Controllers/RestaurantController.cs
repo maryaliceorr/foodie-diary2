@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FoodieDiary2.DataAccess;
+using FoodieDiary2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -20,10 +21,18 @@ namespace FoodieDiary2.Controllers
             _restaurantStorage = new RestaurantStorage(config);
         }
 
-        [HttpGet("restaurantstatics")]
-        public IActionResult GetStates()
+        [HttpGet("")]
+        public IActionResult GetRestaurants()
         {
-            return Ok(_restaurantStorage.GetStates());
+            return Ok(_restaurantStorage.GetRestaurants());
         }
+        
+        [HttpPost("addrestaurant")]
+        public IActionResult AddRestaurant([FromBody] Restaurant restaurant)
+          
+        {
+            return Ok(_restaurantStorage.Add(restaurant));
+        }
+
     }
 }

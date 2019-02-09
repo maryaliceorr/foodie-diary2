@@ -1,7 +1,20 @@
 ﻿body {
 
 }
+.panel-heading {
+    background-color: red;
+}
 
-.panel {
-    width: 275px;
+.panel-danger {
+    border-color: red;
+}
+
+.panel-danger > .panel-heading {
+    background-image: none;
+    background-color: red;
+    color: white;
+}
+
+.button-danger {
+    background-color: red;
 }
