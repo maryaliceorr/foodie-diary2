@@ -97,9 +97,10 @@ export class MakeAMeal extends Component {
         const newRestaurant = { ...this.state.newRestaurant };
         e.preventDefault();
         restaurantCalls.postRestaurant(newRestaurant)
-            .then(() => {
+            .then((result) => {
                 this.setState({
                     newRestaurant: {
+                        id: result,
                         restaurantName: '',
                         address: '',
                         city: '',
@@ -112,6 +113,7 @@ export class MakeAMeal extends Component {
                         notes: '',
                     }
                 })
+                this.props.history.push(`/step2/${this.state.newRestaurant.id}`);
             })
             .catch((error) => {
                 console.error('There was an error posting the new restaurant ', error);
@@ -236,14 +238,12 @@ export class MakeAMeal extends Component {
                             componentClass="textarea"
                             placeholder="Great atmosphere, lively and fun" />
                     </FormGroup>
-                    <Link to={`/step2`}>
                     <Button
                         type="submit"
                         bsStyle="info"
                         onClick={this.postNewRestaurant}>
                         <Glyphicon
                                 glyph="floppy-disk" /> Save Restaurant Information</Button>
-                    </Link>
                 </form>
             </div>
         );

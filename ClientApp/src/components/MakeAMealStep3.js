@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Modal, Button, Radio, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
+import { Modal, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
 import courseCalls from '../DBRequests/courseCalls';
 import dishTypeCalls from '../DBRequests/dishTypeCalls';
 import dishCalls from '../DBRequests/dishCalls';
@@ -48,6 +48,7 @@ export class MakeAMealStep3 extends Component {
                 taste: '',
                 description: '',
                 price: '',
+                mealId: '',
             }
         };
     }
@@ -122,10 +123,12 @@ export class MakeAMealStep3 extends Component {
     postNewDish = (e) => {
         const newDish = { ...this.state.newDish };
         e.preventDefault();
+        newDish.mealId = this.props.match.params.mealid
         dishCalls.postDish(newDish)
-            .then(() => {
+            .then((result) => {
                 this.setState({
                     newDish: {
+                        id: result,
                         dishName: '',
                         courseId: '',
                         dishTypeId: '',
@@ -137,8 +140,10 @@ export class MakeAMealStep3 extends Component {
                         taste: '',
                         description: '',
                         price: '',
+                        mealId: '',
                     }
                 })
+              
             })
             .catch((error) => {
                 console.error('There was an error posting the new dish ', error);
@@ -153,7 +158,7 @@ export class MakeAMealStep3 extends Component {
                 <option
                     key={course.id}
                     id="courseId"
-                    value={newDish.courseId}
+                    value={course.id}
                 >{course.courseName}</option>
             );
         });
@@ -162,7 +167,7 @@ export class MakeAMealStep3 extends Component {
                 <option
                     key={dishType.id}
                     id="dishTypeId"
-                    value={newDish.dishTypeId}
+                    value={dishType.id}
                 >{dishType.dishTypeName}</option>
             );
         });
@@ -215,7 +220,7 @@ export class MakeAMealStep3 extends Component {
                                 <FormControl
                                     componentClass="select"
                                     placeholder="select"
-                                    onChange={this.courseChanged}>
+                                    onChange={this.courseIdChanged}>
                                     <option value="select">Choose the Course</option>
                                     {courses}
                                 </FormControl>
@@ -225,7 +230,7 @@ export class MakeAMealStep3 extends Component {
                                 <FormControl
                                     componentClass="select"
                                     placeholder="select"
-                                    onChange={this.dishTypeChanged}>
+                                    onChange={this.dishTypeIdChanged}>
                                     <option value="select">Choose the Dish Type</option>
                                     {dishTypes}
                                 </FormControl>
@@ -237,7 +242,7 @@ export class MakeAMealStep3 extends Component {
                                     placeholder="ground beef, sausage, mozzarella cheese, tomato, basil, lasagna noodles, parmesean, oregano, garlic, onion, ricotta cheese"
                                     id="ingredient"
                                     value={newDish.ingredient}
-                                    onChange={this.dishNameChanged}/>
+                                    onChange={this.ingredientChanged}/>
                             </FormGroup>
                             <FormGroup controlId="formControlsTextarea">
                                 <ControlLabel>Description</ControlLabel>
@@ -257,6 +262,46 @@ export class MakeAMealStep3 extends Component {
                                         value={newDish.price}
                                         onChange={this.priceChanged} />
                                 </InputGroup>
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Aroma Score</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    placeholder="score 1-5"
+                                    id="aroma"
+                                    value={newDish.aroma}
+                                    onChange={this.aromaChanged}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Appearance Score</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    placeholder="score 1-5"
+                                    id="appearance"
+                                    value={newDish.appearance}
+                                    onChange={this.appearanceChanged}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Creativity Score</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    placeholder="score 1-5"
+                                    id="creativity"
+                                    value={newDish.creativity}
+                                    onChange={this.creativityChanged}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Taste Score</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    placeholder="score 1-5"
+                                    id="taste"
+                                    value={newDish.taste}
+                                    onChange={this.tasteChanged}
+                                />
                             </FormGroup>
                             <FormGroup>
                             <input type="file"

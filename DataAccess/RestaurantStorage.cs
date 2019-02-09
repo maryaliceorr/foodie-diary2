@@ -30,16 +30,16 @@ namespace FoodieDiary2.DataAccess
             }
         }
 
-        public bool Add(Restaurant restaurant)
+        public int Add(Restaurant restaurant)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Execute(@"insert into [dbo].[Restaurant]( [RestaurantName], [Notes], [OpenStatus], [Address], [City], [ZipCode],[FoodGenreId], [Telephone], [Website], [StateAbbrId])
-                   values( @RestaurantName, @Notes, @OpenStatus, @Address, @City, @ZipCode, @FoodGenreId, @Telephone, @Website, @StateAbbrId)", restaurant);
+                var result = connection.QueryFirst<int>(@"insert into [dbo].[Restaurant]( [RestaurantName], [Notes], [OpenStatus], [Address], [City], [ZipCode],[FoodGenreId], [Telephone], [Website], [StateAbbrId])
+                   values( @RestaurantName, @Notes, @OpenStatus, @Address, @City, @ZipCode, @FoodGenreId, @Telephone, @Website, @StateAbbrId); SELECT SCOPE_IDENTITY()", restaurant);
 
-                return result == 1;
+                return result;
             }
         }
 

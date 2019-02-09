@@ -13,23 +13,23 @@ namespace FoodieDiary2.DataAccess
 
     {
         private readonly string ConnectionString;
-        private string connectionstring;
+
 
         public MealStorage(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        public bool Add(Meal meal)
+        public int Add(Meal meal)
         {
-            using (var db = new SqlConnection(connectionstring))
+            using(var connection = new SqlConnection(ConnectionString))
             {
-                db.Open();
+                connection.Open();
 
-                var result = db.Execute(@"insert into [dbo].[Meal]( [MealName], [Date], [MealTypeId], [RestaurantId])
-                                            values( @MealName, @Date, @MealTypeId, @RestaurantId)", meal);
+                var result = connection.QueryFirst<int>(@"insert into [dbo].[Meal]( [MealName], [Date], [MealTypeId], [RestaurantId])
+                  values( @MealName, @Date, @MealTypeId, @RestaurantId); SELECT SCOPE_IDENTITY()", meal);
 
-                return result == 1;
+                return result;
             }
         }
     }

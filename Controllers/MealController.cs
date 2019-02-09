@@ -22,9 +22,9 @@ namespace FoodieDiary2.Controllers
         }
 
         [HttpPost("addmeal")]
-        public void AddMeal(Meal meal)
+        public IActionResult AddMeal(Meal meal)
         {
-            _mealStorage.Add(meal);
+            return Ok(_mealStorage.Add(meal));
         }
 
     }

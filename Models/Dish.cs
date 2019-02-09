@@ -8,6 +8,7 @@ namespace FoodieDiary2.Models
     public class Dish
     {
         public int Id { get; set; }
+        public int MealId { get; set; }
         public string DishName { get; set; }
         public string DishTypeName { get; set; }
         public int DishTypeId { get; set; }

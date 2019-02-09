@@ -32,17 +32,7 @@ export class NavMenu extends Component {
               <NavItem>
                 My Meals
               </NavItem>
-              </LinkContainer>
-              <LinkContainer to={'/step2'}>
-                  <NavItem>
-                    MakeAMealStep2
-                  </NavItem>
-              </LinkContainer>
-              <LinkContainer to={'/step3'}>
-                  <NavItem>
-                        MakeAMealStep3
-                </NavItem>
-                </LinkContainer>
+              </LinkContainer> 
           </Nav>
         </Navbar.Collapse>
       </Navbar>

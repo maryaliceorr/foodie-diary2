@@ -15,6 +15,7 @@ const getMyMeals = () => {
 
 const postMeal = (meal) => {
     return new Promise((resolve, reject) => {
+        console.log(meal);
         axios
             .post(`/api/meal/addmeal`, meal)
             .then((res) => {

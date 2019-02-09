@@ -27,6 +27,12 @@ namespace FoodieDiary2.Controllers
             return Ok(_dishStorage.GetDishes());
         }
 
+        [HttpGet("dishestable")]
+        public IActionResult GetDishesTable()
+        {
+            return Ok(_dishStorage.GetDishesTable());
+        }
+
         [HttpGet("{id:int}")]
         public IActionResult GetDishById(int id)
         {
@@ -64,10 +70,10 @@ namespace FoodieDiary2.Controllers
         }
 
         [HttpPost("adddish")]
-        public void AddDish([FromBody] Dish dish)
+        public IActionResult AddDish([FromBody] Dish dish)
 
         {
-            _dishStorage.Add(dish);
+            return Ok(_dishStorage.Add(dish));
         }
 
     }

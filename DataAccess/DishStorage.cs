@@ -17,6 +17,18 @@ namespace FoodieDiary2.DataAccess
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
+        public List<Dish> GetDishesTable()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.Query<Dish>(@"SELECT * FROM DISH");
+
+                return result.ToList();
+            }
+        }
+
 
         public List<Dish> GetDishes()
         {
@@ -239,16 +251,16 @@ namespace FoodieDiary2.DataAccess
                 return result.ToList();
             }
         }
-        public bool Add(Dish dish)
+        public int Add(Dish dish)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Execute(@"insert into [dbo].[Dish]( [MealId], [DishName], [CourseId], [DishTypeId], [Ingredient], [Picture],[Appearance], [Aroma], [Creativity], [Taste], [Description], [Price])
-                   values( @MealId, @DishName, @CourseId, @DishTypeId, @Ingredient, @Picture, @Appearance, @Aroma, @Creativity, @Taste, @Description, @Price)", dish);
+                var result = connection.QueryFirst<int>(@"insert into [dbo].[Dish]( [MealId], [DishName], [CourseId], [DishTypeId], [Ingredient], [Picture],[Appearance], [Aroma], [Creativity], [Taste], [Description], [Price])
+                   values( @MealId, @DishName, @CourseId, @DishTypeId, @Ingredient, @Picture, @Appearance, @Aroma, @Creativity, @Taste, @Description, @Price); SELECT SCOPE_IDENTITY()", dish);
 
-                return result == 1;
+                return result;
             }
         }
 

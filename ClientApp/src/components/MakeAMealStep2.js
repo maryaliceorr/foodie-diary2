@@ -1,12 +1,7 @@
 ﻿import React, { Component } from 'react';
-import { Modal, Button, Radio, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
-import stateAbbrCalls from '../DBRequests/stateAbbrCalls';
-import foodGenreCalls from '../DBRequests/foodGenreCalls';
-import courseCalls from '../DBRequests/courseCalls';
-import dishTypeCalls from '../DBRequests/dishTypeCalls';
+import { Button, FormGroup, FormControl, ControlLabel, Glyphicon } from 'react-bootstrap';
 import mealTypeCalls from '../DBRequests/mealTypeCalls';
-import mealCalls from '../DBRequests/mealTypeCalls';
-import restaurantCalls from '../DBRequests/restaurantCalls';
+import mealCalls from '../DBRequests/mealCalls';
 
 export class MakeAMealStep2 extends Component {
 
@@ -21,7 +16,6 @@ export class MakeAMealStep2 extends Component {
     };
 
     componentDidMount() {
-       
         mealTypeCalls
             .getMealTypes()
             .then((mealTypes) => {
@@ -40,34 +34,32 @@ export class MakeAMealStep2 extends Component {
     }
 
    mealNameChanged = (e) => {
-        this.formFieldStringState('restaurantName', e);
+        this.formFieldStringState('mealName', e);
     }
 
     dateChanged = (e) => {
-        this.formFieldStringState('address', e);
+        this.formFieldStringState('date', e);
     }
     mealTypeIdChanged = (e) => {
-        this.formFieldStringState('city', e);
+        this.formFieldStringState('mealTypeId', e);
     }
-
-    restaurantIdChanged = (e) => {
-        this.formFieldStringState('stateAbbrId', e);
-    }
-
    
     postNewMeal = (e) => {
         const newMeal = { ...this.state.newMeal };
         e.preventDefault();
-        mealCalls.postNewMeal(newMeal)
-            .then(() => {
+        newMeal.restaurantId = this.props.match.params.restaurantid
+        mealCalls.postMeal(newMeal)
+            .then((result) => {
                 this.setState({
-                    newRestaurant: {
+                    newMeal: {
+                        id: result,
                         mealName: '',
                         date: '',
                         mealTypeId: '',
                         restaurantId: '',
                     }
                 })
+                this.props.history.push(`/step3/${this.state.newMeal.id}`);
             })
             .catch((error) => {
                 console.error('There was an error posting the new meal ', error);
@@ -75,7 +67,7 @@ export class MakeAMealStep2 extends Component {
     }
 
     render() {
-        const { newMeal } = this.state;
+       const { newMeal } = this.state;
         const mealTypes = this.state.mealTypes.map((mealType) => {
             return (
                 <option
@@ -101,6 +93,7 @@ export class MakeAMealStep2 extends Component {
                     <FormGroup>
                         <ControlLabel>Date</ControlLabel>
                         <FormControl
+                            key={newMeal.id}
                             type="date"
                             id="date"
                             value={newMeal.date}

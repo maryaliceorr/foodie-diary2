@@ -28,10 +28,10 @@ namespace FoodieDiary2.Controllers
         }
         
         [HttpPost("addrestaurant")]
-        public void AddRestaurant([FromBody] Restaurant restaurant)
+        public IActionResult AddRestaurant([FromBody] Restaurant restaurant)
           
         {
-            _restaurantStorage.Add(restaurant);
+            return Ok(_restaurantStorage.Add(restaurant));
         }
 
     }

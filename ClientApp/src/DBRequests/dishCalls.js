@@ -4,7 +4,7 @@ const postDish = (dish) => {
     return new Promise((resolve, reject) => {
         console.log(dish);
         axios
-            .post(`/api/restaurant/adddish`, dish)
+            .post(`/api/dish/adddish`, dish)
             .then((res) => {
                 resolve(res.data);
             })
