@@ -1,8 +1,10 @@
 ﻿import React, { Component } from 'react';
 import { Modal, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import courseCalls from '../DBRequests/courseCalls';
 import dishTypeCalls from '../DBRequests/dishTypeCalls';
 import dishCalls from '../DBRequests/dishCalls';
+import { NewMeal } from './NewMeal';
 
 export class MakeAMealStep3 extends Component {
 
@@ -123,6 +125,7 @@ export class MakeAMealStep3 extends Component {
     postNewDish = (e) => {
         const newDish = { ...this.state.newDish };
         e.preventDefault();
+
         newDish.mealId = this.props.match.params.mealid
         dishCalls.postDish(newDish)
             .then((result) => {
@@ -143,7 +146,7 @@ export class MakeAMealStep3 extends Component {
                         mealId: '',
                     }
                 })
-              
+                
             })
             .catch((error) => {
                 console.error('There was an error posting the new dish ', error);
@@ -178,9 +181,7 @@ export class MakeAMealStep3 extends Component {
                 <Button bsStyle="primary" variant="outline-secondary" onClick={this.handleShow}>
                     Add A Dish
                  </Button>
-                <Button bsStyle="info">
-                    I'm done. Go to my Meal.
-                 </Button>
+                
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
@@ -323,6 +324,15 @@ export class MakeAMealStep3 extends Component {
                             onClick={this.postNewDish}>
                             <Glyphicon
                                 glyph="floppy-disk" /> Save Dish Information</Button>
+                        <Link
+                            to={`/newmeal/${newDish.mealId}`}
+                            component={NewMeal}>
+                            <Button
+                                bsStyle="info"
+                            >
+                                I'm done. Go to my Meal.
+                     </Button>
+                        </Link>
                     </Modal.Footer>
                 </Modal>
             </div>
