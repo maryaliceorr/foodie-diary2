@@ -9,6 +9,7 @@ import { MakeAMealStep3 } from './components/MakeAMealStep3';
 import { NewMeal } from './components/NewMeal';
 import { IndividualMeal } from './components/IndividualMeal';
 import { IndividualDish } from './components/IndividualDish';
+import { ImageHandler } from './components/ImageHandler';
 
 export default class App extends Component {
   displayName = App.name
@@ -24,6 +25,7 @@ export default class App extends Component {
             <Route path='/newmeal' component={NewMeal} />
             <Route path='/individualmeal/:individualmealid' component={IndividualMeal} />
             <Route path='/individualdish/:individualdishid' component={IndividualDish} />
+            <Route path='/imagehandler' component={ImageHandler} />
       </Layout>
     );
   }

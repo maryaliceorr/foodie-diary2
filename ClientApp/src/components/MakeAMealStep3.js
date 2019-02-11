@@ -1,4 +1,6 @@
-﻿import React, { Component } from 'react';
+﻿
+import axios from 'axios';
+import React, { Component } from 'react';
 import { Modal, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import courseCalls from '../DBRequests/courseCalls';
@@ -56,8 +58,17 @@ export class MakeAMealStep3 extends Component {
     }
 
     fileUploadHandler = () => {
+        const photoFieldValue = new FormData();
+        photoFieldValue.append('image'.this.state.selectedFile, this.state.selectedFile.name)
+        axios.post('', photoFieldValue)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.error('There was an error posting the image ', error);
+            });
+    };
 
-    }
 
     formFieldStringState = (variable, e) => {
         const temporaryDish = { ...this.state.newDish };
