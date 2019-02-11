@@ -37,7 +37,7 @@ namespace FoodieDiary2.Models
         public bool OpenStatus { get; set; }
         public string Address { get; set; }
         public int ZipCode { get; set; }
-        public long Telephone { get; set; }
+        public string Telephone { get; set; }
         public string Website { get; set; }
         public string StateAbbrId { get; set; }
 

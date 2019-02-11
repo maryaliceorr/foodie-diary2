@@ -17,7 +17,7 @@ namespace FoodieDiary2.Models
         public Decimal Longitude { get; set; }
         public Decimal Latitude { get; set; }
         public string FoodGenreId { get; set; }
-        public long Telephone { get; set; }
+        public string Telephone { get; set; }
         public string Website { get; set; }
         public string StateAbbrId { get; set; }
     }
