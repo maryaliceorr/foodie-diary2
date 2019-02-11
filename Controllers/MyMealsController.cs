@@ -26,11 +26,5 @@ namespace FoodieDiary2.Controllers
             return Ok(_myMealsStorage.GetMyMeals());
         }
 
-        [HttpGet("currentmeal")]
-        public IActionResult GetMyCurrentMeal()
-        {
-            return Ok(_myMealsStorage.GetMyCurrentMeal());
-        }
-
     }
 }

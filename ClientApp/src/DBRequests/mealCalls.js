@@ -40,6 +40,18 @@ const getMyCurrentMeal = () => {
     });
 };
 
+const getMyIndividualMeal = (individualMealId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/api/meal/${individualMealId}`)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
 
 
-export default { getMyMeals, postMeal, getMyCurrentMeal };
+export default { getMyMeals, postMeal, getMyCurrentMeal, getMyIndividualMeal };

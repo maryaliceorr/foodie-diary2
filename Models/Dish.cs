@@ -24,18 +24,19 @@ namespace FoodieDiary2.Models
         public decimal TotalScore { get; set; }
         public string Picture { get; set; }
         public string MealName { get; set; }
+        public int MealTypeId { get; set; }
+        public string MealTypeName { get; set; }
         public DateTime Date { get; set; }
+        public int RestaurantId { get; set; }
         public string RestaurantName { get; set; }
         public string City { get; set; }
         public string StateAbbr { get; set; }
         public string FoodGenreName { get; set; }
+        public int FoodGenreId { get; set; }
         public string Notes { get; set; }
         public bool OpenStatus { get; set; }
         public string Address { get; set; }
         public int ZipCode { get; set; }
-        public Decimal Longitude { get; set; }
-        public Decimal Latitude { get; set; }
-        public string FoodGenreId { get; set; }
         public long Telephone { get; set; }
         public string Website { get; set; }
         public string StateAbbrId { get; set; }

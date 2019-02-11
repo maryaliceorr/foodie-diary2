@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import dishByScoresCalls from '../DBRequests/dishByScoresCalls';
 import Panel from 'react-bootstrap/lib/Panel';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import './Home.css';
 
@@ -77,7 +78,9 @@ export class Home extends Component {
                                     {aromaDish.date}
                                 </Moment>
                             </h6>
-                            <Button bsStyle="danger">View Dish</Button>
+                            <Link to={`/individualdish/${aromaDish.id}`}>
+                                <Button bsStyle="default">View Dish</Button>
+                            </Link>
                         </Panel.Body>
                     </Panel>
                 </div>
@@ -102,7 +105,9 @@ export class Home extends Component {
                                     {appearanceDish.date}
                                 </Moment>
                             </h6>
-                            <Button bsStyle="warning">View Dish</Button>
+                            <Link to={`/individualdish/${appearanceDish.id}`}>
+                                <Button bsStyle="default">View Dish</Button>
+                            </Link>
                         </Panel.Body>
                     </Panel>
                 </div>
@@ -127,7 +132,9 @@ export class Home extends Component {
                                     {creativityDish.date}
                                 </Moment>
                             </h6>
-                            <Button bsStyle="success">View Dish</Button>
+                            <Link to={`/individualdish/${creativityDish.id}`}>
+                                <Button bsStyle="default">View Dish</Button>
+                            </Link>
                         </Panel.Body>
                             </Panel>
                 </div>
@@ -152,7 +159,9 @@ export class Home extends Component {
                                     {tasteDish.date}
                                 </Moment>
                             </h6>
-                            <Button bsStyle="primary">View Dish</Button>
+                            <Link to={`/individualdish/${tasteDish.id}`}>
+                                <Button bsStyle="default">View Dish</Button>
+                            </Link>
                         </Panel.Body>   
                     </Panel>
                 </div>
@@ -178,7 +187,9 @@ export class Home extends Component {
                                     {totalScoreDish.date}
                                 </Moment>
                             </h6>
-                            <Button bsStyle="default">View Dish</Button>
+                            <Link to={`/individualdish/${totalScoreDish.id}`}>
+                                <Button bsStyle="default">View Dish</Button>
+                            </Link>
                         </Panel.Body>
                     </Panel>
                 </div>

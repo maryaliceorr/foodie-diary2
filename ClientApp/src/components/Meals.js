@@ -1,7 +1,9 @@
 ﻿import React, { Component } from 'react';
-import mealsCall from '../DBRequests/mealCalls';
+import mealCalls from '../DBRequests/mealCalls';
 import { Panel, Button, Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+
 import "./Meals.css";
 
 export class Meals extends Component {
@@ -11,7 +13,7 @@ export class Meals extends Component {
     }
 
     componentDidMount() {
-        mealsCall
+        mealCalls
             .getMyMeals()
             .then((mymeals) => {
                 this.setState({ mymeals })
@@ -25,7 +27,8 @@ export class Meals extends Component {
         const mymeals = this.state.mymeals.map((mymeal) => {
             return (  
                     <Col xs={12} md={4}>
-                        <div key={mymeal.id}>
+                    <div key={mymeal.id}>
+                        
                             <Panel bsStyle="danger">
                                 <Panel.Heading>
                                     <Panel.Title componentClass="h3">{mymeal.mealName}</Panel.Title>
@@ -39,10 +42,14 @@ export class Meals extends Component {
                                 </h4>
                                 <h5>{mymeal.city}, {mymeal.stateAbbr}</h5>      
                                 <h5>Cuisine: {mymeal.foodGenreName}</h5>
-                                <h5>{mymeal.mealTypeName}</h5>
+                                    <h5>{mymeal.mealTypeName}</h5>
+
+                                <Link to={`/individualmeal/${mymeal.id}`}>
                                     <Button bsStyle="warning">View Meal</Button>
+                                </Link>
                                 </Panel.Body>
                             </Panel>
+                       
                         </div>
                     </Col>
              );

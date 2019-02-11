@@ -63,31 +63,44 @@ namespace FoodieDiary2.DataAccess
             }
         }
 
-        public Dish GetDishById(int id)
+        public Dish GetIndividualDishById(int id)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
                 var result = connection.QueryFirst<Dish>(@"SELECT D.*,		
-                                                               DT.DishTypeName,
-	                                                           M.MealName,
-	                                                           M.Date,
-	                                                           C.CourseName, 
-	                                                           R.RestaurantName,
-	                                                           R.City,
-	                                                           SA.StateAbbr,
-	                                                           FG.FoodGenreName
+	                                                        M.MealName,
+                                                            M.Date,
+                                                            M.MealTypeId,
+                                                            M.RestaurantId,
+	                                                        R.RestaurantName,
+                                                            R.Notes,
+                                                            R.OpenStatus,
+                                                            R.Address,
+                                                            R.City,
+                                                            R.ZipCode,
+                                                            R.FoodGenreId,
+                                                            R.Telephone,
+                                                            R.Website,
+                                                            R.StateAbbrId,
+                                                            C.CourseName,
+	                                                        SA.StateAbbr,
+                                                            DT.DishTypeName,
+                                                            MT.MealTypeName,
+	                                                        FG.FoodGenreName
                                                         FROM Dish D
                                                         LEFT JOIN Course C
                                                         ON D.CourseId = C.Id
-                                                        JOIN DishType DT
+                                                        LEFT JOIN DishType DT
                                                         ON D.DishTypeId = DT.Id
                                                         JOIN Meal M
                                                         ON D.MealId = M.Id
                                                         JOIN Restaurant R
                                                         ON M.RestaurantId = R.Id
-                                                        JOIN FoodGenre FG
+                                                        JOIN MealType MT
+                                                        ON M.MealTypeId = MT.Id
+                                                        LEFT JOIN FoodGenre FG
                                                         ON R.FoodGenreId = FG.Id
                                                         LEFT JOIN StateAbbr SA
                                                         ON R.StateABbrId = SA.Id
@@ -104,25 +117,42 @@ namespace FoodieDiary2.DataAccess
                 connection.Open();
 
                 var result = connection.Query<Dish>(@"SELECT TOP 10 D.Aroma,
-				                                                    D.Id, 
-				                                                    D.DishName,
-																	M.Date,
-				                                                    D.Description,
-				                                                    D.Picture, 
-				                                                    R.RestaurantName,
-				                                                    R.City, 
-				                                                    SA.StateAbbr,
-																	C.CourseName
-				                                                    FROM Dish D
-				                                                    JOIN MEAL M
-				                                                    ON D.Mealid = M.Id
-				                                                    JOIN Restaurant R
-				                                                    ON M.RestaurantId = R.Id
+                                                                        D.*,
+				                                                        M.MealName,
+                                                                        M.Date,
+                                                                        M.MealTypeId,
+                                                                        M.RestaurantId,
+	                                                                    R.RestaurantName,
+                                                                        R.Notes,
+                                                                        R.OpenStatus,
+                                                                        R.Address,
+                                                                        R.City,
+                                                                        R.ZipCode,
+                                                                        R.FoodGenreId,
+                                                                        R.Telephone,
+                                                                        R.Website,
+                                                                        R.StateAbbrId,
+                                                                        C.CourseName,
+	                                                                    SA.StateAbbr,
+                                                                        DT.DishTypeName,
+                                                                        MT.MealTypeName,
+	                                                                    FG.FoodGenreName
+                                                                    FROM Dish D
+                                                                    LEFT JOIN Course C
+                                                                    ON D.CourseId = C.Id
+                                                                    LEFT JOIN DishType DT
+                                                                    ON D.DishTypeId = DT.Id
+                                                                    JOIN Meal M
+                                                                    ON D.MealId = M.Id
+                                                                    JOIN Restaurant R
+                                                                    ON M.RestaurantId = R.Id
+                                                                    JOIN MealType MT
+                                                                    ON M.MealTypeId = MT.Id
+                                                                    LEFT JOIN FoodGenre FG
+                                                                    ON R.FoodGenreId = FG.Id
                                                                     LEFT JOIN StateAbbr SA
                                                                     ON R.StateABbrId = SA.Id
-																	JOIN Course C
-																	ON D.CourseId = C.Id
-				                                                    ORDER BY Aroma DESC");
+				                                                    ORDER BY D.Aroma DESC");
 
                 return result.ToList();
             }
@@ -137,6 +167,7 @@ namespace FoodieDiary2.DataAccess
                 var result = connection.Query<Dish>(@"SELECT TOP 10 D.Appearance,
 				                                                    D.Id, 
 				                                                    D.DishName,
+                                                                    D.MealId,
 																	M.Date,
 				                                                    D.Description,
 				                                                    D.Picture, 
@@ -168,6 +199,7 @@ namespace FoodieDiary2.DataAccess
                 var result = connection.Query<Dish>(@"SELECT TOP 10 D.Creativity,
 				                                                    D.Id, 
 				                                                    D.DishName,
+                                                                    D.MealId,
 																	M.Date,
 				                                                    D.Description,
 				                                                    D.Picture, 
@@ -199,6 +231,7 @@ namespace FoodieDiary2.DataAccess
                 var result = connection.Query<Dish>(@"SELECT TOP 10 D.Taste,
 				                                                    D.Id, 
 				                                                    D.DishName,
+                                                                    D.MealId,
 																	M.Date,
 				                                                    D.Description,
 				                                                    D.Picture, 
@@ -230,6 +263,7 @@ namespace FoodieDiary2.DataAccess
                 var result = connection.Query<Dish>(@"SELECT TOP 10 D.TotalScore,
 				                                                    D.Id, 
 				                                                    D.DishName,
+                                                                    D.MealId,
 																	M.Date,
 				                                                    D.Description,
 				                                                    D.Picture, 
@@ -264,5 +298,25 @@ namespace FoodieDiary2.DataAccess
             }
         }
 
+
+        public List<Dish> GetDishesForMyMeal(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.Query<Dish>(@"SELECT D.*,
+		                                                        C.CourseName,
+                                                                DT.DishTypeName
+                                                        FROM Dish D
+                                                        JOIN DishType DT
+                                                        ON D.DishTypeId = DT.Id
+                                                        JOIN Course C
+                                                        ON D.CourseId = C.Id
+                                                        WHERE D.MealId = @id", new { id = id });
+
+                return result.ToList();
+            }
+        }
     }
 }

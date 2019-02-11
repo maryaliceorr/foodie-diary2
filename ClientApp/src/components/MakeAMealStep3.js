@@ -27,13 +27,7 @@ export class MakeAMealStep3 extends Component {
             });
     };
 
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleShow = this.handleShow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-
-        this.state = {
+       state = {
             show: false,
             courses: [],
             dishTypes: [],
@@ -51,18 +45,10 @@ export class MakeAMealStep3 extends Component {
                 description: '',
                 price: '',
                 mealId: '',
-            }
+           },
+           newDishes: [],
         };
-    }
-
-    handleClose() {
-        this.setState({ show: false });
-    }
-
-    handleShow() {
-        this.setState({ show: true });
-    }
-
+  
     fileSelectedHandler = event => {
         this.setState({
             selectedFile: event.target.files[0]
@@ -122,40 +108,38 @@ export class MakeAMealStep3 extends Component {
         this.formFieldStringState('price', e);
     }
 
-    postNewDish = (e) => {
-        const newDish = { ...this.state.newDish };
-        e.preventDefault();
-
-        newDish.mealId = this.props.match.params.mealid
-        dishCalls.postDish(newDish)
-            .then((result) => {
-                this.setState({
-                    newDish: {
-                        id: result,
-                        dishName: '',
-                        courseId: '',
-                        dishTypeId: '',
-                        ingredient: '',
-                        picture: '',
-                        appearance: '',
-                        aroma: '',
-                        creativity: '',
-                        taste: '',
-                        description: '',
-                        price: '',
-                        mealId: '',
-                    }
+        postNewDish = (e) => {
+            const newDish = { ...this.state.newDish };
+            e.preventDefault();
+            newDish.mealId = this.props.match.params.mealid
+            dishCalls.postDish(newDish)
+                .then((result) => {
+                    this.setState({
+                        newDish: {
+                            id: result,
+                            dishName: '',
+                            courseId: '',
+                            dishTypeId: '',
+                            ingredient: '',
+                            picture: '',
+                            appearance: '',
+                            aroma: '',
+                            creativity: '',
+                            taste: '',
+                            description: '',
+                            price: '',
+                            mealId: '',
+                        },
+                        newDishes: [{newDish}]
+                    })
                 })
-                
-            })
-            .catch((error) => {
-                console.error('There was an error posting the new dish ', error);
-            })
-    }
+                .catch((error) => {
+                    console.error('There was an error posting the new dish ', error);
+                })
+        }
 
     render() {
         const { newDish } = this.state;
-      
         const courses = this.state.courses.map((course) => {
             return (
                 <option
@@ -174,37 +158,10 @@ export class MakeAMealStep3 extends Component {
                 >{dishType.dishTypeName}</option>
             );
         });
- 
+
         return (
             <div>
                 <h1>Step 3: Add Your Dishes</h1>
-                <Button bsStyle="primary" variant="outline-secondary" onClick={this.handleShow}>
-                    Add A Dish
-                 </Button>
-                
-
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Dish Info</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button bsStyle="info" variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button bsStyle="primary" variant="primary" onClick={this.handleClose}>
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Dish Info</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
                         <form>
                             <FormGroup>
                                 <ControlLabel>Dish Name</ControlLabel>
@@ -243,7 +200,7 @@ export class MakeAMealStep3 extends Component {
                                     placeholder="ground beef, sausage, mozzarella cheese, tomato, basil, lasagna noodles, parmesean, oregano, garlic, onion, ricotta cheese"
                                     id="ingredient"
                                     value={newDish.ingredient}
-                                    onChange={this.ingredientChanged}/>
+                                    onChange={this.ingredientChanged} />
                             </FormGroup>
                             <FormGroup controlId="formControlsTextarea">
                                 <ControlLabel>Description</ControlLabel>
@@ -305,38 +262,28 @@ export class MakeAMealStep3 extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                            <input type="file"
+                                <input type="file"
                                     onChange={this.pictureChanged}
                                     id="picture"
-                                    ></input>
-                            <Button onClick={this.fileUploadHandler}>Upload</Button>
+                                ></input>
+                                <Button onClick={this.fileUploadHandler}>Upload</Button>
                             </FormGroup>
-                            
+
                         </form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button bsStyle="info" variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
                         <Button
                             type="submit"
                             bsStyle="info"
                             onClick={this.postNewDish}>
                             <Glyphicon
-                                glyph="floppy-disk" /> Save Dish Information</Button>
-                        <Link
-                            to={`/newmeal/${newDish.mealId}`}
-                            component={NewMeal}>
-                            <Button
-                                bsStyle="info"
-                            >
+                        glyph="floppy-disk" /> Save Dish Information</Button>
+                        <Link to={`/newmeal/${newDish.mealId}`}>
+                        <Button
+                                bsStyle="info">
                                 I'm done. Go to my Meal.
-                     </Button>
+                        </Button>
                         </Link>
-                    </Modal.Footer>
-                </Modal>
             </div>
 
         );
-    };
+    }
 };

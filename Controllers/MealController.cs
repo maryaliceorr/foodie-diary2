@@ -27,5 +27,11 @@ namespace FoodieDiary2.Controllers
             return Ok(_mealStorage.Add(meal));
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetMyIndividualMeal(int id)
+        {
+            return Ok(_mealStorage.GetMyIndividualMeal(id));
+        }
+
     }
 }

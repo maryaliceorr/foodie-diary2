@@ -18,13 +18,15 @@ namespace FoodieDiary2.DataAccess
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
+
         public List<MyMeals> GetMyMeals()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<MyMeals>(@"SELECT M.MealName,
+                var result = connection.Query<MyMeals>(@"SELECT M.Id,
+                                                                M.MealName,
 		                                                        M.Date,
 		                                                        M.MealName,
 		                                                        SA.StateAbbr,
@@ -101,5 +103,6 @@ namespace FoodieDiary2.DataAccess
                 return result.ToList();
             }
         }
+
     }
 }
