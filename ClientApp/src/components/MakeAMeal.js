@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import {Button, Radio, FormGroup, FormControl, ControlLabel, Glyphicon } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import stateAbbrCalls from '../DBRequests/stateAbbrCalls';
 import foodGenreCalls from '../DBRequests/foodGenreCalls';
 import restaurantCalls from '../DBRequests/restaurantCalls';

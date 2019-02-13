@@ -47,7 +47,7 @@ export class IndividualMeal extends Component {
                                 <Panel.Title componentClass="h3">{mydish.dishName}</Panel.Title>
                             </Panel.Heading>
                                 <Panel.Body>
-                                <img className="card-image" src={mydish.picture} />
+                            <img className="card-image" src={mydish.picture} alt={mydish.dishName}/>
                                 <h4>Course: {mydish.courseName}</h4>
                                 <h4>Dish Type: {mydish.dishTypeName}</h4>
                                 <h4>Ingredients:</h4>

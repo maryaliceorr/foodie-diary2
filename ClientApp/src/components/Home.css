@@ -1,7 +1,23 @@
 ﻿
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    background-image: url("./images/marble.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 
 .panel-title {
     word-wrap: initial;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+
+h2, h3 {
+    text-align: center;
 }
 
     p {
@@ -30,7 +46,7 @@
     .ticker-wrap {
         width: 100%;
         padding-left: 100%;
-        background-color: #eee;
+        background-color: none;
     }
 
     .ticker-move {
@@ -40,7 +56,7 @@
         animation-iteration-count: infinite;
         animation-timing-function: linear;
         animation-name: ticker;
-        animation-duration: 20s;
+        animation-duration: 30s;
     }
 
         .ticker-move:hover {
@@ -53,16 +69,18 @@
         margin: 10px;
     }
 
-    .card-image {
-        width: 95%;
-    }
+.card-image {
+    object-fit: cover;
+    width: 300px;
+    height: 250px;
+}
 
     .description {
         display: inline-block;
     }
 
     .panel {
-        width: 275px;
+        width: 330px;
     }
 
     .topdish-heading {
@@ -119,11 +137,16 @@
     color: white;
 }
 
+.btn {
+    font-size: 20px;
+}
+
 .btn-warning {
     background-color: #f9cf11;
     border-color: #f9cf11;
     color: white;
     background-image: none;
+    text-align: center;
 }
 
 .btn-danger {
@@ -154,18 +177,32 @@
     background-image: none;
 }
 
-.aroma-wrap {
-    background-color: #f7c0c0;
+.aroma-title {
+    color: red;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 45px;
 }
 
-.appearance-wrap {
-    background-color: #fcf1bd;
+.appearance-title {
+    color: #f9cf11;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 45px;
 }
 
-.creativity-wrap {
-    background-color: #c7f9c7;
+.creativity-title {
+    color: darkgreen;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 45px;
 }
 
-.taste-wrap {
-    background-color: #c9e3fc;
+.taste-title {
+    color: darkblue;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 45px;
+}
+
+.total-title {
+    font-size: 50px;
+    color: black;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

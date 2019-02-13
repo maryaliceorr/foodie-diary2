@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import dishByScoresCalls from '../DBRequests/dishByScoresCalls';
 import Panel from 'react-bootstrap/lib/Panel';
-import { Button } from 'react-bootstrap';
+import { Glyphicon, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import './Home.css';
@@ -60,6 +60,11 @@ export class Home extends Component {
     };
 
     render() {
+        const onestar = <div><Glyphicon glyph="star" /><Glyphicon glyph="star-empty" /><Glyphicon glyph="star-empty" /><Glyphicon glyph="star-empty" /><Glyphicon glyph="star-empty" /></div>;
+        const twostar = <div><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star-empty" /><Glyphicon glyph="star-empty" /><Glyphicon glyph="star-empty" /></div>;
+        const threestar = <div><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star-empty" /><Glyphicon glyph="star-empty" /></div>;
+        const fourstar = <div><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star-empty" /></div>;
+        const fivestar = <div><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /></div>;
         const aromaDishes = this.state.aromaDishes.map((aromaDish) => {
             return (
                 <div className="ticker-item" key={ aromaDish.id } >
@@ -68,19 +73,21 @@ export class Home extends Component {
                             <Panel.Title componentClass="h3">{aromaDish.dishName}</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <img className="card-image" src={aromaDish.picture} />
-                            <h4>Aroma Score: {aromaDish.aroma}</h4>
-                            <h5>{aromaDish.restaurantName}</h5>
-                            <h6>{aromaDish.city}, {aromaDish.stateAbbr}</h6>
-                            <h6>{aromaDish.courseName}</h6>
-                            <h6>
+                            <img className="card-image" src={aromaDish.picture} alt={aromaDish.dishName} />
+                            <h3>Aroma Score: <span className="aroma-stars">{aromaDish.aroma === 1 ? onestar : aromaDish.aroma === 2 ? twostar : aromaDish.aroma === 3 ? threestar : aromaDish.aroma === 4 ? fourstar : fivestar}</span></h3>
+                            <h4>
                                 <Moment format="MMMM DD, YYYY">
                                     {aromaDish.date}
                                 </Moment>
-                            </h6>
+                            </h4>
+                            <h4>{aromaDish.restaurantName}</h4>
+                            <h4>{aromaDish.city}, {aromaDish.stateAbbr}</h4>
+                            <h4>{aromaDish.courseName}</h4>
+                            <div className="text-center">
                             <Link to={`/individualdish/${aromaDish.id}`}>
-                                <Button bsStyle="default">View Dish</Button>
+                                <Button bsStyle="danger">View Dish</Button>
                             </Link>
+                            </div>
                         </Panel.Body>
                     </Panel>
                 </div>
@@ -95,19 +102,23 @@ export class Home extends Component {
                             <Panel.Title componentClass="h3">{appearanceDish.dishName}</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <img className="card-image" src={appearanceDish.picture} />
-                            <h4>Appearance Score: {appearanceDish.appearance}</h4>
-                            <h5>{appearanceDish.restaurantName}</h5>
-                            <h6>{appearanceDish.city}, {appearanceDish.stateAbbr}</h6>
-                            <h6>{appearanceDish.courseName}</h6>
-                            <h6>
+                            <div className="image-container">
+                                <img className="card-image" src={appearanceDish.picture} alt={appearanceDish.dishName} />
+                            </div>
+                            <h4>
                                 <Moment format="MMMM DD, YYYY">
                                     {appearanceDish.date}
                                 </Moment>
-                            </h6>
+                            </h4>
+                            <h3>Appearance Score: <span className="appearance-stars">{appearanceDish.appearance === 1 ? onestar : appearanceDish.appearance === 2 ? twostar : appearanceDish.appearance === 3 ? threestar : appearanceDish.appearance === 4 ? fourstar : fivestar}</span></h3>
+                            <h4>{appearanceDish.restaurantName}</h4>
+                            <h4>{appearanceDish.city}, {appearanceDish.stateAbbr}</h4>
+                            <h4>{appearanceDish.courseName}</h4>
+                            <div className="text-center">
                             <Link to={`/individualdish/${appearanceDish.id}`}>
-                                <Button bsStyle="default">View Dish</Button>
-                            </Link>
+                                <Button bsStyle="warning">View Dish</Button>
+                                </Link>
+                            </div>
                         </Panel.Body>
                     </Panel>
                 </div>
@@ -119,22 +130,24 @@ export class Home extends Component {
                 <div className="ticker-item" key={creativityDish.id}>
                     <Panel bsStyle="success">
                         <Panel.Heading bsStyle="success">
-                                    <Panel.Title componentClass="h3">{creativityDish.dishName}</Panel.Title>
+                            <Panel.Title componentClass="h3">{creativityDish.dishName}</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <img className="card-image" src={creativityDish.picture} />
-                            <h4>Creativity Score: {creativityDish.creativity}</h4>
-                            <h5>{creativityDish.restaurantName}</h5>
-                            <h6>{creativityDish.city}, {creativityDish.stateAbbr}</h6>
-                            <h6>{creativityDish.courseName}</h6>
-                            <h6>
+                            <img className="card-image" src={creativityDish.picture} alt={creativityDish.dishName} />
+                            <h3>Creativity Score: <span className="creativity-stars">{creativityDish.creativity === 1 ? onestar : creativityDish.creativity === 2 ? twostar : creativityDish.creativity === 3 ? threestar : creativityDish.creativity === 4 ? fourstar : fivestar}</span></h3>
+                            <h4>
                                 <Moment format="MMMM DD, YYYY">
                                     {creativityDish.date}
                                 </Moment>
-                            </h6>
-                            <Link to={`/individualdish/${creativityDish.id}`}>
-                                <Button bsStyle="default">View Dish</Button>
-                            </Link>
+                            </h4>
+                            <h4>{creativityDish.restaurantName}</h4>
+                            <h4>{creativityDish.city}, {creativityDish.stateAbbr}</h4>
+                            <h4>{creativityDish.courseName}</h4>
+                            <div className="text-center">
+                                <Link to={`/individualdish/${creativityDish.id}`}>
+                                    <Button bsStyle="success">View Dish</Button>
+                                </Link>
+                            </div>
                         </Panel.Body>
                             </Panel>
                 </div>
@@ -146,22 +159,24 @@ export class Home extends Component {
                 <div className="ticker-item" key={tasteDish.id}>
                     <Panel bsStyle="primary">
                         <Panel.Heading>
-                                <Panel.Title componentclass="h3">{tasteDish.dishName}</Panel.Title>
+                            <Panel.Title componentclass="h3">{tasteDish.dishName}</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <img className="card-image" src={tasteDish.picture} />
-                            <h4>Taste Score: {tasteDish.taste}</h4>
-                            <h5>{tasteDish.restaurantName}</h5>
-                            <h6>{tasteDish.city}, {tasteDish.stateAbbr}</h6>
-                            <h6>{tasteDish.courseName}</h6>
-                            <h6>
+                            <img className="card-image" src={tasteDish.picture} alt={tasteDish.dishName} />
+                            <h3>Taste Score: <span className="taste-stars">{tasteDish.taste === 1 ? onestar : tasteDish.taste === 2 ? twostar : tasteDish.taste === 3 ? threestar : tasteDish.taste === 4 ? fourstar : fivestar}</span></h3>
+                            <h4>
                                 <Moment format="MMMM DD, YYYY">
                                     {tasteDish.date}
                                 </Moment>
-                            </h6>
-                            <Link to={`/individualdish/${tasteDish.id}`}>
-                                <Button bsStyle="default">View Dish</Button>
-                            </Link>
+                            </h4>
+                            <h4>{tasteDish.restaurantName}</h4>
+                            <h4>{tasteDish.city}, {tasteDish.stateAbbr}</h4>
+                            <h4>{tasteDish.courseName}</h4>
+                            <div className="text-center">
+                                <Link to={`/individualdish/${tasteDish.id}`}>
+                                    <Button bsStyle="primary">View Dish</Button>
+                                </Link>
+                            </div>
                         </Panel.Body>   
                     </Panel>
                 </div>
@@ -177,19 +192,21 @@ export class Home extends Component {
                             <Panel.Title componentClass="h3">{totalScoreDish.dishName}</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <img className="card-image" src={totalScoreDish.picture} />
-                            <h4>Total Score: {totalScoreDish.totalScore}</h4>
-                            <h5>{totalScoreDish.restaurantName}</h5>
-                            <h6>{totalScoreDish.city}, {totalScoreDish.stateAbbr}</h6>
-                            <h6>{totalScoreDish.courseName}</h6>
-                            <h6>
+                            <img className="card-image" src={totalScoreDish.picture} alt={totalScoreDish.dishName} />
+                            <h3>Total Score: <span className="total-stars">{totalScoreDish.totalScore === 1 ? onestar : totalScoreDish.totalScore === 2 ? twostar : totalScoreDish.totalScore === 3 ? threestar : totalScoreDish.totalScore === 4 ? fourstar : fivestar}</span></h3>
+                            <h4>
                                 <Moment format="MMMM DD, YYYY">
                                     {totalScoreDish.date}
                                 </Moment>
-                            </h6>
-                            <Link to={`/individualdish/${totalScoreDish.id}`}>
-                                <Button bsStyle="default">View Dish</Button>
-                            </Link>
+                            </h4>
+                            <h4>{totalScoreDish.restaurantName}</h4>
+                            <h4>{totalScoreDish.city}, {totalScoreDish.stateAbbr}</h4>
+                            <h4>{totalScoreDish.courseName}</h4>
+                            <div className="text-center">
+                                <Link to={`/individualdish/${totalScoreDish.id}`}>
+                                    <Button bsStyle="default">View Dish</Button>
+                                </Link>
+                            </div>
                         </Panel.Body>
                     </Panel>
                 </div>
@@ -198,7 +215,7 @@ export class Home extends Component {
 
         return (
             <div>
-                <h1>My Top Dishes</h1>
+                <h1 className="total-title">My Top Dishes</h1>
                 <div className="tcontainer">
                     <div className="ticker-wrap total-wrap">
                         <div className="ticker-move">
@@ -206,7 +223,7 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <h2>Best Aroma</h2>
+                <h2 className="aroma-title">Best Aroma</h2>
                 <div className="tcontainer">
                     <div className="ticker-wrap aroma-wrap">
                         <div className="ticker-move">
@@ -214,7 +231,7 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <h2>Best Appearance</h2>
+                <h2 className="appearance-title">Best Appearance</h2>
                 <div className="tcontainer">
                     <div className="ticker-wrap appearance-wrap">
                         <div className="ticker-move">
@@ -222,7 +239,7 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <h2>Best Creativity</h2>
+                <h2 className="creativity-title">Best Creativity</h2>
                 <div className="tcontainer">
                     <div className="ticker-wrap creativity-wrap">
                         <div className="ticker-move">
@@ -230,7 +247,7 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <h2>Best Taste</h2>
+                <h2 className="taste-title">Best Taste</h2>
                 <div className="tcontainer">
                     <div className="ticker-wrap taste-wrap">
                         <div className="ticker-move">

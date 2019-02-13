@@ -1,1 +1,22 @@
 ﻿
+.nav-header {
+    background-color: #F92A23;
+}
+
+.navbar-collapse, .collapse {
+    background-color: #F92A23;
+    color: white;
+}
+
+.navbar-brand {
+    background-color: #F92A23;
+    color: white;
+}
+
+li:active {
+    background-color: black;
+}
+
+a {
+    color: white;
+}

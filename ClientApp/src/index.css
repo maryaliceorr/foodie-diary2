@@ -2,10 +2,15 @@
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {
         padding-top: 50px;
+        font-family: 'Josefin Slab', serif;
     }
 }
 
 h1 {
     margin-top: 75px;
+    text-align: center;
 }
 
+h2{
+
+}

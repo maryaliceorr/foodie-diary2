@@ -1,17 +1,16 @@
-﻿
-import axios from 'axios';
-import React, { Component } from 'react';
-import { Modal, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
+﻿import React, { Component } from 'react';
+import { Alert, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import courseCalls from '../DBRequests/courseCalls';
 import dishTypeCalls from '../DBRequests/dishTypeCalls';
 import dishCalls from '../DBRequests/dishCalls';
-import { NewMeal } from './NewMeal';
+import firebase from '../../node_modules/firebase';
+import FileUploader from "react-firebase-file-uploader";
 
 export class MakeAMealStep3 extends Component {
 
     componentDidMount() {
-        courseCalls 
+        courseCalls
             .getCourses()
             .then((courses) => {
                 this.setState({ courses })
@@ -29,51 +28,61 @@ export class MakeAMealStep3 extends Component {
             });
     };
 
-       state = {
+    closeAlert = () => {
+        const emptyAlert = {
             show: false,
-            courses: [],
-            dishTypes: [],
-            selectedFile: null,
-            newDish: {
-                dishName: '',
-                courseId: '',
-                dishTypeId: '',
-                ingredient: '',
-                picture: '',
-                appearance: '',
-                aroma: '',
-                creativity: '',
-                taste: '',
-                description: '',
-                price: '',
-                mealId: '',
-           },
-           newDishes: [],
-        };
-  
-    fileSelectedHandler = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
+            spotName: "",
+            tripName: "",
+        }
+        this.setState({ alert: emptyAlert });
     }
 
-    fileUploadHandler = () => {
-        const photoFieldValue = new FormData();
-        photoFieldValue.append('image'.this.state.selectedFile, this.state.selectedFile.name)
-        axios.post('', photoFieldValue)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((error) => {
-                console.error('There was an error posting the image ', error);
-            });
+    state = {
+        alert: {
+            show: false
+        },
+        isUploading: false,
+        progress: 0,
+        avatarURL: '',
+        courses: [],
+        dishTypes: [],
+        mealid: '',
+        selectedFile: null,
+        newDish: {
+            dishName: '',
+            courseId: '',
+            dishTypeId: '',
+            ingredient: '',
+            picture: '',
+            appearance: '',
+            aroma: '',
+            creativity: '',
+            taste: '',
+            description: '',
+            price: '',
+            mealId: '',
+        },
+        newDishes: [],
     };
 
+    handleUploadSuccess = filename => {
+        const { newDish } = { ...this.state }
+
+        firebase
+            .storage()
+            .ref("images")
+            .child(filename)
+            .getDownloadURL()
+            .then(url => {
+                newDish.picture = url;
+                this.setState({ newDish });
+            });
+    };
 
     formFieldStringState = (variable, e) => {
         const temporaryDish = { ...this.state.newDish };
         temporaryDish[variable] = e.target.value;
-        this.setState({ newDish: temporaryDish});
+        this.setState({ newDish: temporaryDish });
     }
 
     dishNameChanged = (e) => {
@@ -111,7 +120,7 @@ export class MakeAMealStep3 extends Component {
         this.formFieldStringState('taste', e);
     }
 
-   descriptionChanged = (e) => {
+    descriptionChanged = (e) => {
         this.formFieldStringState('description', e);
     }
 
@@ -119,37 +128,49 @@ export class MakeAMealStep3 extends Component {
         this.formFieldStringState('price', e);
     }
 
-        postNewDish = (e) => {
-            const newDish = { ...this.state.newDish };
-            e.preventDefault();
-            newDish.mealId = this.props.match.params.mealid
-            dishCalls.postDish(newDish)
-                .then((result) => {
-                    this.setState({
-                        newDish: {
-                            id: result,
-                            dishName: '',
-                            courseId: '',
-                            dishTypeId: '',
-                            ingredient: '',
-                            picture: '',
-                            appearance: '',
-                            aroma: '',
-                            creativity: '',
-                            taste: '',
-                            description: '',
-                            price: '',
-                            mealId: '',
-                        },
-                        newDishes: [{newDish}]
-                    })
+    postNewDish = (e) => {
+        const newDish = { ...this.state.newDish };
+        e.preventDefault();
+        newDish.mealId = this.props.match.params.mealid
+        dishCalls.postDish(newDish)
+            .then((result) => {
+                this.setState({
+                    alert: {
+                        show: true,
+                    },
+                    newDish: {
+                        id: result,
+                        dishName: '',
+                        courseId: '',
+                        dishTypeId: '',
+                        ingredient: '',
+                        picture: '',
+                        appearance: '',
+                        aroma: '',
+                        creativity: '',
+                        taste: '',
+                        description: '',
+                        price: '',
+                        mealId: '',
+                    },
+                    mealid: this.props.match.params.mealid
                 })
-                .catch((error) => {
-                    console.error('There was an error posting the new dish ', error);
-                })
-        }
+            })
+            .catch((error) => {
+                console.error('There was an error posting the new dish ', error);
+            })
+    }
 
     render() {
+
+        let alertStuff = undefined;
+        if (this.state.alert.show) {
+            alertStuff = (<Alert
+                bsStyle="success"
+                onDismiss={this.closeAlert}
+                className="text-center">test alert</Alert>)
+        }
+
         const { newDish } = this.state;
         const courses = this.state.courses.map((course) => {
             return (
@@ -173,126 +194,128 @@ export class MakeAMealStep3 extends Component {
         return (
             <div>
                 <h1>Step 3: Add Your Dishes</h1>
-                        <form>
-                            <FormGroup>
-                                <ControlLabel>Dish Name</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    placeholder="Lasagna"
-                                    id="dishName"
-                                    value={newDish.dishName}
-                                    onChange={this.dishNameChanged}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Course</ControlLabel>
-                                <FormControl
-                                    componentClass="select"
-                                    placeholder="select"
-                                    onChange={this.courseIdChanged}>
-                                    <option value="select">Choose the Course</option>
-                                    {courses}
-                                </FormControl>
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Dish Type</ControlLabel>
-                                <FormControl
-                                    componentClass="select"
-                                    placeholder="select"
-                                    onChange={this.dishTypeIdChanged}>
-                                    <option value="select">Choose the Dish Type</option>
-                                    {dishTypes}
-                                </FormControl>
-                            </FormGroup>
-                            <FormGroup controlId="formControlsTextarea">
-                                <ControlLabel>Ingredients</ControlLabel>
-                                <FormControl
-                                    componentClass="textarea"
-                                    placeholder="ground beef, sausage, mozzarella cheese, tomato, basil, lasagna noodles, parmesean, oregano, garlic, onion, ricotta cheese"
-                                    id="ingredient"
-                                    value={newDish.ingredient}
-                                    onChange={this.ingredientChanged} />
-                            </FormGroup>
-                            <FormGroup controlId="formControlsTextarea">
-                                <ControlLabel>Description</ControlLabel>
-                                <FormControl
-                                    componentClass="textarea"
-                                    placeholder="Homemade noodles with bolognese and fresh mozzarella"
-                                    id="description"
-                                    value={newDish.description}
-                                    onChange={this.descriptionChanged} />
-                            </FormGroup>
-                            <FormGroup>
-                                <InputGroup>
-                                    <InputGroup.Addon>$</InputGroup.Addon>
-                                    <FormControl
-                                        type="text"
-                                        id="price"
-                                        value={newDish.price}
-                                        onChange={this.priceChanged} />
-                                </InputGroup>
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Aroma Score</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    placeholder="score 1-5"
-                                    id="aroma"
-                                    value={newDish.aroma}
-                                    onChange={this.aromaChanged}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Appearance Score</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    placeholder="score 1-5"
-                                    id="appearance"
-                                    value={newDish.appearance}
-                                    onChange={this.appearanceChanged}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Creativity Score</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    placeholder="score 1-5"
-                                    id="creativity"
-                                    value={newDish.creativity}
-                                    onChange={this.creativityChanged}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Taste Score</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    placeholder="score 1-5"
-                                    id="taste"
-                                    value={newDish.taste}
-                                    onChange={this.tasteChanged}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <input type="file"
-                                    onChange={this.pictureChanged}
-                                    id="picture"
-                                ></input>
-                                <Button onClick={this.fileUploadHandler}>Upload</Button>
-                            </FormGroup>
+                <div>{alertStuff}</div>
+                <form>
+                    <FormGroup>
+                        <ControlLabel>Dish Name</ControlLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="Lasagna"
+                            id="dishName"
+                            value={newDish.dishName}
+                            onChange={this.dishNameChanged}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Course</ControlLabel>
+                        <FormControl
+                            componentClass="select"
+                            placeholder="select"
+                            onChange={this.courseIdChanged}>
+                            <option value="select">Choose the Course</option>
+                            {courses}
+                        </FormControl>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Dish Type</ControlLabel>
+                        <FormControl
+                            componentClass="select"
+                            placeholder="select"
+                            onChange={this.dishTypeIdChanged}>
+                            <option value="select">Choose the Dish Type</option>
+                            {dishTypes}
+                        </FormControl>
+                    </FormGroup>
+                    <FormGroup controlId="formControlsTextarea">
+                        <ControlLabel>Ingredients</ControlLabel>
+                        <FormControl
+                            componentClass="textarea"
+                            placeholder="ground beef, sausage, mozzarella cheese, tomato, basil, lasagna noodles, parmesean, oregano, garlic, onion, ricotta cheese"
+                            id="ingredient"
+                            value={newDish.ingredient}
+                            onChange={this.ingredientChanged} />
+                    </FormGroup>
+                    <FormGroup controlId="formControlsTextarea">
+                        <ControlLabel>Description</ControlLabel>
+                        <FormControl
+                            componentClass="textarea"
+                            placeholder="Homemade noodles with bolognese and fresh mozzarella"
+                            id="description"
+                            value={newDish.description}
+                            onChange={this.descriptionChanged} />
+                    </FormGroup>
+                    <FormGroup>
+                        <InputGroup>
+                            <InputGroup.Addon>$</InputGroup.Addon>
+                            <FormControl
+                                type="text"
+                                id="price"
+                                value={newDish.price}
+                                onChange={this.priceChanged} />
+                        </InputGroup>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Aroma Score</ControlLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="score 1-5"
+                            id="aroma"
+                            value={newDish.aroma}
+                            onChange={this.aromaChanged}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Appearance Score</ControlLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="score 1-5"
+                            id="appearance"
+                            value={newDish.appearance}
+                            onChange={this.appearanceChanged}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Creativity Score</ControlLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="score 1-5"
+                            id="creativity"
+                            value={newDish.creativity}
+                            onChange={this.creativityChanged}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Taste Score</ControlLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="score 1-5"
+                            id="taste"
+                            value={newDish.taste}
+                            onChange={this.tasteChanged}
+                        />
+                    </FormGroup>
 
-                        </form>
-                        <Button
-                            type="submit"
-                            bsStyle="info"
-                            onClick={this.postNewDish}>
-                            <Glyphicon
+                    <FileUploader
+                        accept="image/*"
+                        name="avatar"
+                        randomizeFilename
+                        storageRef={firebase.storage().ref("images")}
+                        onUploadSuccess={this.handleUploadSuccess}
+                    />
+                </form>
+
+                <Button
+                    type="submit"
+                    bsStyle="info"
+                    onClick={this.postNewDish}>
+                    <Glyphicon
                         glyph="floppy-disk" /> Save Dish Information</Button>
-                        <Link to={`/newmeal/${newDish.mealId}`}>
-                        <Button
-                                bsStyle="info">
-                                I'm done. Go to my Meal.
+                <Link to={`/newmeal/${this.state.mealid}`}>
+                    <Button
+                        bsStyle="info">
+                        I'm done. Go to my Meal.
                         </Button>
-                        </Link>
+                </Link>
             </div>
 
         );

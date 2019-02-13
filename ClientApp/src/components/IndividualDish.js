@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
-import { Panel, Col, Row, Glyphicon } from 'react-bootstrap';
+import { Panel, Col, Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
-import mealCalls from '../DBRequests/mealCalls';
 import dishCalls from '../DBRequests/dishCalls';
 import "./IndividualMeal.css";
 import NumberFormat from 'react-number-format';
@@ -32,7 +31,6 @@ export class IndividualDish extends Component {
         const fivestar = <div><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /><Glyphicon glyph="star" /></div>;
 
         const mydish = this.state.individualdish;
-        console.log(mydish);
             return (
                 <div>
                     <div>
@@ -61,7 +59,7 @@ export class IndividualDish extends Component {
                                 <Panel.Title componentClass="h3">{mydish.dishName}</Panel.Title>
                             </Panel.Heading>
                             <Panel.Body>
-                                <img className="card-image" src={mydish.picture} />
+                                <img className="card-image" src={mydish.picture} alt={mydish.dishName} />
                                 <h4>Course: {mydish.courseName}</h4>
                                 <h4>Dish Type: {mydish.dishTypeName}</h4>
                                 <h4>Ingredients:</h4>

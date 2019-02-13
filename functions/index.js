@@ -1,7 +1,10 @@
 const functions = require('firebase-functions');
 
-exports.onFileChange = functions.storage.object().onChange(event => {
 
-    console.log(event);
-    return;
-});
+exports.addPicture = functions.https.onRequest((req, res) => {
+    const pictureParameter = req.query.picture;
+
+    return admin.database().ref('/pictures').push({ picture: picture })
+
+    return res.redirect(303,)
+})
