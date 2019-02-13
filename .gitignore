@@ -234,3 +234,4 @@ _Pvt_Extensions
 .fake/
 
 **/src/constants.js
+appsettings.json
