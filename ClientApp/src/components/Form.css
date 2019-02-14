@@ -1,0 +1,72 @@
+﻿body {
+    font-family: 'Josefin Sans', sans-serif;
+    background-image: url("./images/marble1.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-control {
+    background-color: #303030;
+    color: white;
+}
+
+input {
+    color: lightgray;
+}
+
+#notes {
+    height: 70px;
+}
+
+.form-button-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.radio-background {
+    font-size:  14px;
+    font-weight: bold;
+}
+
+.form-step2 {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-button {
+   color: #303030
+
+}
+
+.step3-button {
+    margin: 10px;
+}
+
+.input-group-addon {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-color: black;
+}
+
+.alert-danger {
+    font-size: 24px;
+    background-color: #1CCB4B;
+    border-color: #0A3615;
+    background-image: none;
+    color: #0A3615;
+}
+
+@media (max-width: 767px) {
+    .formstep2 {
+        width: 100%;
+
+    }
+
+}

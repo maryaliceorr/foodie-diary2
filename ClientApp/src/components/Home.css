@@ -1,171 +1,224 @@
 ﻿
+    .Home {
+        font-family: 'Josefin Sans', sans-serif;
+        background-image: url("./images/mercury.jpg");
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: -500px;
+        margin: -30px;
+     }
 
-.panel-title {
-    word-wrap: initial;
-}
 
-    p {
-        flex-wrap: wrap !important;
-    }
-
-    .card-description {
-        width: 95%;
-    }
-
-    @keyframes ticker {
-        0% {
-            transform: translate3d(0, 0, 0);
-        }
-
-        100% {
-            transform: translate3d(-100%, 0, 0);
-        }
-    }
-
-    .tcontainer {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .ticker-wrap {
-        width: 100%;
-        padding-left: 100%;
-        background-color: #eee;
-    }
-
-    .ticker-move {
-        display: inline-block;
-        white-space: nowrap;
-        padding-right: 100%;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        animation-name: ticker;
-        animation-duration: 20s;
-    }
-
-        .ticker-move:hover {
-            animation-play-state: paused;
-        }
-
-    .ticker-item {
-        display: inline-block;
-        padding: 10px;
-        margin: 10px;
-    }
-
-    .card-image {
-        width: 95%;
-    }
-
-    .description {
-        display: inline-block;
-    }
-
-    .panel {
-        width: 275px;
-    }
-
-    .topdish-heading {
-        background-color: black;
-    }
-
-.panel-warning {
-    border-color: #f9cf11;
-}
-
-    .panel-warning > .panel-heading {
-        background-image: none;
-        background-color: #f9cf11;
+    .panel-title {
+        word-wrap: initial;
+        font-size: 20px;
+        text-align: center;
         color: white;
     }
 
-.panel-default {
-    border-color: black;
-}
+    h2, h3 {
+        text-align: center;
+    }
 
-.panel-default > .panel-heading {
-    background-image: none;
-    background-color: black;
-    color: white;
-}
+        p {
+            flex-wrap: wrap !important;
+        }
 
-.panel-success {
-    border-color: darkgreen;
-}
+        .card-description {
+            width: 95%;
+        }
 
-.panel-success > .panel-heading {
-    background-image: none;
-    background-color: darkgreen;
-    color: white;
-}
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        .tcontainer {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            padding-left: 100%;
+            background-color: none;
+        }
+
+        .ticker-move {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: ticker;
+            animation-duration: 30s;
+        }
+
+            .ticker-move:hover {
+                animation-play-state: paused;
+            }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 10px;
+            margin: 10px;
+        }
+
+    .card-image {
+        object-fit: cover;
+        width: 300px;
+        height: 250px;
+    }
+
+        .description {
+            display: inline-block;
+        }
+
+        .panel {
+            width: 330px;
+        }
+
+        .topdish-heading {
+            background-color: black;
+        }
+
+    .panel-warning {
+        border-color: #f9cf11;
+    }
+
+        .panel-warning > .panel-heading {
+            background-image: none;
+            background-color: #f9cf11;
+            color: white;
+        }
+
+    .panel-default {
+        border-color: black;
+    }
+
+    .panel-default > .panel-heading {
+        background-image: none;
+        background-color: black;
+        color: white;
+    }
+
+    .panel-success {
+        border-color: darkgreen;
+    }
+
+    .panel-success > .panel-heading {
+        background-image: none;
+        background-color: darkgreen;
+        color: white;
+    }
 
 .panel-danger {
-    border-color: red;
+    border-color: #e10000;
 }
 
-.panel-danger > .panel-heading {
-    background-image: none;
-    background-color: red;
-    color: white;
-}
+    .panel-danger > .panel-heading {
+        background-image: none;
+        background-color: #e10000;
+        color: white;
+    }
 
-.panel-primary {
-    border-color: darkblue;
-}
+    .panel-primary {
+        border-color: darkblue;
+    }
 
-.panel-primary > .panel-heading {
-    background-image: none;
-    background-color: darkblue;
-    color: white;
-}
+    .panel-primary > .panel-heading {
+        background-image: none;
+        background-color: darkblue;
+        color: white;
+    }
 
-.btn-warning {
-    background-color: #f9cf11;
-    border-color: #f9cf11;
-    color: white;
-    background-image: none;
-}
+    .btn {
+        font-size: 20px;
+    }
+
+    .btn-warning {
+        background-color: #f9cf11;
+        border-color: #f9cf11;
+        color: white;
+        background-image: none;
+        text-align: center;
+    }
 
 .btn-danger {
-    background-color: red;
-    border-color: red;
+    background-color: #e10000;
+    border-color: #e10000;
     color: white;
     background-image: none;
 }
 
-.btn-success {
-    background-color: darkgreen;
-    border-color: darkgreen;
-    color: white;
-    background-image: none;
-}
+    .btn-success {
+        background-color: darkgreen;
+        border-color: darkgreen;
+        color: white;
+        background-image: none;
+    }
 
 .btn-primary {
     background-color: darkblue;
-    background-color: darkblue;
+    border-color: darkblue;
     color: white;
     background-image: none;
 }
 
 .btn-default {
     background-color: black;
-    background-color: black;
+    border-color: black;
     color: white;
     background-image: none;
 }
 
-.aroma-wrap {
-    background-color: #f7c0c0;
+.btn-info {
+    background-color: #e10000;
+    border-color: #e10000;
+    color: white;
+    background-image: none;
 }
 
-.appearance-wrap {
-    background-color: #fcf1bd;
+.btn:hover, .btn:focus {
+    background-color: lightgray;
+    border-color: #303030;
+    color: black;
+    background-image: none;
 }
 
-.creativity-wrap {
-    background-color: #c7f9c7;
+.aroma-title {
+    color: white;
+    text-shadow: -1px 0 #e10000, 0 1px #e10000, 1px 0 #e10000, 0 -1px #e10000;
+    font-size: 45px;
 }
 
-.taste-wrap {
-    background-color: #c9e3fc;
+.appearance-title {
+    color: white;
+    text-shadow: -1px 0 #f9cf11, 0 1px #f9cf11, 1px 0 #f9cf11, 0 -1px #f9cf11;
+    font-size: 45px;
+}
+
+.creativity-title {
+    color: white;
+    text-shadow: -1px 0 darkgreen, 0 1px darkgreen, 1px 0 darkgreen, 0 -1px darkgreen;
+    font-size: 45px;
+}
+
+.taste-title {
+    color: white;
+    text-shadow: -1px 0 darkblue, 0 1px darkblue, 1px 0 darkblue, 0 -1px darkblue;
+    font-size: 45px;
+}
+
+.total-title {
+    font-size: 50px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

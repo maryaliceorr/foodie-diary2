@@ -8,9 +8,9 @@ export class MakeAMealStep2 extends Component {
     state = {
         mealTypes: [],
         newMeal: {
-            mealName: '',
-            date: '',
-            mealTypeId: '',
+            mealName: 'Dinner with the Fam',
+            date: '2018-10-18',
+            mealTypeId: '4',
             restaurantId: '',
         }
     };
@@ -80,7 +80,7 @@ export class MakeAMealStep2 extends Component {
         return (
             <div>
                 <h1>Step 2: Meal Info</h1>
-                <form>
+                <form className="form-step2">
                     <FormGroup>
                         <ControlLabel>Meal Name</ControlLabel>
                         <FormControl
@@ -110,12 +110,14 @@ export class MakeAMealStep2 extends Component {
                             {mealTypes}
                         </FormControl>
                     </FormGroup>
-                    <Button
-                        type="submit"
-                        bsStyle="info"
-                        onClick={this.postNewMeal}>
-                        <Glyphicon
-                            glyph="floppy-disk" /> Save Meal Information</Button>
+                    <div className="form-button-container">
+                        <Button
+                            type="submit"
+                            bsStyle="info"
+                            onClick={this.postNewMeal}>
+                            <Glyphicon glyph="floppy-disk" /> Save Meal Information
+                        </Button>
+                    </div>
                 </form>
 
             </div>

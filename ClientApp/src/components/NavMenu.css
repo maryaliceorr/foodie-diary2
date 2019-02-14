@@ -1,1 +1,49 @@
 ﻿
+
+.navbar-header {
+    background-color: #e10000;
+}
+
+.navbar-toggle.collapsed {
+    color: white;
+}
+
+.navbar-collapse, .collapse {
+    background-color: #e10000;
+    color: white;
+}
+.navbar-default .navbar-brand {
+    background-color: #e10000;
+    color: white;
+}
+
+.menu-link .active a {
+    background-color: black;
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+    background-color: #e10000;
+    color: white;
+}
+
+
+
+.navbar-default .navbar-nav > li > a:hover {
+color: white;
+background-color: #303030;
+}
+
+
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    background-color: #e10000;
+    color: white;
+}
+
+.nav-logo {
+    width: 200px;
+    margin-top: -15px;
+}
+

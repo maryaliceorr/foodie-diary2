@@ -1,0 +1,46 @@
+﻿.dish-panel {
+    width: 100%;
+}
+
+.card-paragraph {
+    font-size: 12px;
+}
+
+.meal-title {
+    font-size: 32px;
+}
+
+.aroma-stars {
+    color: #e10000;
+}
+
+.appearance-stars {
+    color: #f9cf11;
+
+}
+
+.creativity-stars {
+    color: darkgreen;
+
+}
+
+.taste-stars {
+    color: darkblue;
+
+}
+
+.total-stars {
+    color: black;
+
+}
+
+.phone {
+    border: none;
+    background-color: none;
+    text-align: center;
+}
+
+.stars-container {
+    text-align: center;
+    font-size: 24px;
+}

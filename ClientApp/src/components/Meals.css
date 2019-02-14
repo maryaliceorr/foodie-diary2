@@ -2,19 +2,33 @@
 
 }
 .panel-heading {
-    background-color: red;
+    background-color: #e10000;
 }
 
-.panel-danger {
-    border-color: red;
+.panel-info {
+    border-color: #e10000;
 }
 
-.panel-danger > .panel-heading {
-    background-image: none;
-    background-color: red;
-    color: white;
+    .panel-info > .panel-heading {
+        background-image: none;
+        background-color: #303030;
+        color: white;
+    }
+
+.button-info {
+    background-color: #e10000;
+  
 }
 
-.button-danger {
-    background-color: red;
+.mymeal-panel {
+    text-align: center;
 }
+.mymeals-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+

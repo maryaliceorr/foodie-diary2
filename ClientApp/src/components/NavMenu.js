@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
 
@@ -9,33 +9,38 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <Navbar inverse fixedTop fluid collapseOnSelect>
+      <Navbar fixedTop fluid collapseOnSelect className="navigation">
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}>FoodieDiary2</Link>
+                    <Link to={'/home'}><Image className="nav-logo" src={require("./images/logo.png")} /></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullRight>
-            <LinkContainer to={'/'} exact>
-              <NavItem>
-                 Home
-              </NavItem>
+                <Nav pullRight>
+            <LinkContainer to={'/home'}>
+                <NavItem className="menu-link">
+                    Home
+                </NavItem>
             </LinkContainer>
             <LinkContainer to={'/makeameal'}>
-              <NavItem>
+              <NavItem className="menu-link">
                 Make A Meal
               </NavItem>
             </LinkContainer>
             <LinkContainer to={'/mymeals'}>
-              <NavItem>
+              <NavItem className="menu-link">
                 My Meals
               </NavItem>
+             </LinkContainer> 
+              <LinkContainer to={'/splash'}>
+                <NavItem className="menu-link">
+                  Logout
+                </NavItem>
               </LinkContainer> 
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+        </Navbar>
     );
   }
 }

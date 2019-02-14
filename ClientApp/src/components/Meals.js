@@ -1,7 +1,9 @@
 ﻿import React, { Component } from 'react';
-import mealsCall from '../DBRequests/mealCalls';
+import mealCalls from '../DBRequests/mealCalls';
 import { Panel, Button, Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+
 import "./Meals.css";
 
 export class Meals extends Component {
@@ -11,7 +13,7 @@ export class Meals extends Component {
     }
 
     componentDidMount() {
-        mealsCall
+        mealCalls
             .getMyMeals()
             .then((mymeals) => {
                 this.setState({ mymeals })
@@ -24,9 +26,9 @@ export class Meals extends Component {
     render() {
         const mymeals = this.state.mymeals.map((mymeal) => {
             return (  
+                <div key={mymeal.id}>
                     <Col xs={12} md={4}>
-                        <div key={mymeal.id}>
-                            <Panel bsStyle="danger">
+                            <Panel className="mymeal-panel" bsStyle="info">
                                 <Panel.Heading>
                                     <Panel.Title componentClass="h3">{mymeal.mealName}</Panel.Title>
                                 </Panel.Heading>
@@ -39,23 +41,26 @@ export class Meals extends Component {
                                 </h4>
                                 <h5>{mymeal.city}, {mymeal.stateAbbr}</h5>      
                                 <h5>Cuisine: {mymeal.foodGenreName}</h5>
-                                <h5>{mymeal.mealTypeName}</h5>
-                                    <Button bsStyle="warning">View Meal</Button>
+                                    <h5>{mymeal.mealTypeName}</h5>
+
+                                <Link to={`/individualmeal/${mymeal.id}`}>
+                                    <Button bsStyle="danger">View Meal</Button>
+                                </Link>
                                 </Panel.Body>
                             </Panel>
-                        </div>
                     </Col>
+                </div>
+                
              );
         })
 
         return (
             <div>
-                <Row className="show-grid">
+                
                     <h1>My Meals</h1>
-                    <Row className="justify-content">
+                <div className="mymeals-container">
                         {mymeals}
-                    </Row>
-                </Row>
+                    </div>
             </div>
         );
     }

@@ -27,7 +27,31 @@ const postMeal = (meal) => {
     })
 };
 
+const getMyCurrentMeal = () => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/api/mymeals/currentmeal`)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
+
+const getMyIndividualMeal = (individualMealId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/api/meal/${individualMealId}`)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
 
 
-
-export default { getMyMeals, postMeal };
+export default { getMyMeals, postMeal, getMyCurrentMeal, getMyIndividualMeal };

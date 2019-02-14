@@ -34,9 +34,15 @@ namespace FoodieDiary2.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetDishById(int id)
+        public IActionResult GetIndividualDishById(int id)
         {
-            return Ok(_dishStorage.GetDishById(id));
+            return Ok(_dishStorage.GetIndividualDishById(id));
+        }
+
+        [HttpGet("dishesformeal/{id:int}")]
+        public IActionResult GetDishesForMyMeal(int id)
+        {
+            return Ok(_dishStorage.GetDishesForMyMeal(id));
         }
 
         [HttpGet("aroma")]

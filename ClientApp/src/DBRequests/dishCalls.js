@@ -13,5 +13,30 @@ const postDish = (dish) => {
             })
     })
 };
+const getMyIndividualMealDishes = (individualMealId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/api/dish/dishesformeal/${individualMealId}`)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
 
-export default { postDish };
+const getIndividualDish = (individualDishId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/api/dish/${individualDishId}`)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
+
+export default { postDish, getMyIndividualMealDishes, getIndividualDish };

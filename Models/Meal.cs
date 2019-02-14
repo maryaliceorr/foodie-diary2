@@ -21,6 +21,7 @@ namespace FoodieDiary2.Models
         public string City { get; set; }
         public string StateAbbr { get; set; }
         public int ZipCode { get; set; }
+        public string Telephone { get; set; }
         public string Website { get; set; }
         public string FoodGenreName { get; set; }
     }

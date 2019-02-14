@@ -1,0 +1,77 @@
+﻿
+
+.SplashPage {
+    font-family: 'Josefin Sans', sans-serif;
+    background-image: url("./images/splash3.jpg");
+
+    margin-top: 0px;
+    margin-bottom: -1000px;
+    margin-left: -20px;
+    margin-right: -20px;
+
+
+}
+
+
+
+    .splash-logo {
+        display: block;
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10%;
+    }
+
+    .login-forms {
+        background-color: white;
+        color: #303030;
+    }
+
+    .login-block {
+       margin-left: 35%;
+       margin-right: 35%;
+      margin-bottom: 400px;
+
+    }
+
+    .login-label {
+        color: white;
+    }
+
+.login-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #e10000;
+    background-image: none;
+    font-family: 'Josefin Sans', sans-serif;
+    border-color: white;
+    text-decoration: none;
+
+}
+
+    .login-button :hover  {
+        background-color: #303030;
+        color: white;
+        text-decoration: none;
+    }
+
+    .extra-space {
+        height: 1000px;
+    }
+
+    .SplashPage > a {
+        text-decoration: none;
+    }
+
+@media (max-width: 767px) {
+    .login-block {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .splash-logo {
+        width: 300px;
+    }
+}
