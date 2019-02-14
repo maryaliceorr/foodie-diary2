@@ -1,8 +1,9 @@
 ﻿import React, { Component } from 'react';
-import {Button, Radio, FormGroup, FormControl, ControlLabel, Glyphicon } from 'react-bootstrap';
+import {Col, Button, Radio, FormGroup, FormControl, ControlLabel, Glyphicon } from 'react-bootstrap';
 import stateAbbrCalls from '../DBRequests/stateAbbrCalls';
 import foodGenreCalls from '../DBRequests/foodGenreCalls';
 import restaurantCalls from '../DBRequests/restaurantCalls';
+import './Form.css';
 
 export class MakeAMeal extends Component {
 
@@ -34,16 +35,16 @@ export class MakeAMeal extends Component {
             mealTypes: [],
             selectedFile: null,
             newRestaurant: {
-                restaurantName: '',
-                address: '',
-                city: '',
-                stateAbbrId: '',
-                zipCode: '',
-                telephone: '',
-                website: '',
-                foodGenreId: '',
-                openStatus: '',
-                notes: '',
+                restaurantName: 'Germantown Cafe',
+                address: '1200 5th Ave N',
+                city: 'Nashville',
+                stateAbbrId: '42',
+                zipCode: '37208',
+                telephone: '6152423226',
+                website: 'germantowncafe.com',
+                foodGenreId: '13',
+                openStatus: '1',
+                notes: 'Great bang for your buck restaurant in Nashvile and great ambience.',
             }
         };
    
@@ -144,105 +145,137 @@ export class MakeAMeal extends Component {
             <div>
                 <h1>Step 1: Restaurant Info</h1>            
                 <form>
-                    <FormGroup>
-                        <ControlLabel>Restaurant Name</ControlLabel>
-                        <FormControl
-                            id="restaurantName"
-                            type="text"
-                            onChange={this.restaurantNameChanged}
-                            value={newRestaurant.restaurantName}
-                            placeholder="Little Italy" />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Address</ControlLabel>
-                        <FormControl
-                            id="address"
-                            type="text" 
-                            onChange={this.addressChanged}
-                            value={newRestaurant.address}
-                            placeholder="123 Restaurant Way" />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>City</ControlLabel>
-                        <FormControl
-                            id="city"       
-                            type="text"
-                            onChange={this.cityChanged}
-                            value={newRestaurant.city}
-                            placeholder="New York City" />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>State</ControlLabel>
-                        <FormControl onChange={this.stateAbbrIdChanged} componentClass="select" placeholder="select">
-                            <option value="select">Choose the State</option>
-                            {stateAbbrs}
-                        </FormControl>
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Zip Code</ControlLabel>
-                        <FormControl
-                            id="zipCode"
-                            type="text"
-                            onChange={this.zipCodeChanged}
-                            value={newRestaurant.zipCode}
-                            placeholder="Zip Code" />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Phone</ControlLabel>
-                        <FormControl
-                            id="telephone"
-                            type="text"
-                            onChange={this.telephoneChanged}
-                            value={newRestaurant.telephone}
-                            placeholder="5558889999 - no dashes please" />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Website</ControlLabel>
-                        <FormControl
-                            id="website"
-                            type="text"
-                            onChange={this.websiteChanged}
-                            value={newRestaurant.website}
-                            placeholder="www.littleitaly1.com" />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Type of Cuisine</ControlLabel>
-                        <FormControl
-                            id="foodGenre"
-                            onChange={this.foodGenreIdChanged}
-                            componentClass="select"
-                            placeholder="select">
-                            <option value="select">Choose the Type of Cuisine</option>
-                            {foodGenres}
-                        </FormControl>
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Open Status</ControlLabel>
-                        <Radio
-                            value="true"
-                            onChange={this.openStatusChanged}
-                            name="radioGroup"
-                            inline>Open</Radio>
-                        <Radio
-                            value="false"
-                            onChange={this.openStatusChanged}
-                            name="radioGroup"
-                            inline>Permanently Closed</Radio>
-                    </FormGroup>
-                    <FormGroup controlId="formControlsTextarea">
-                        <ControlLabel>Notes</ControlLabel>
-                        <FormControl
-                            value={newRestaurant.notes}
-                            onChange={this.notesChanged}
-                            componentClass="textarea"
-                            placeholder="Great atmosphere, lively and fun" />
-                    </FormGroup>
-                    <Button
-                        type="submit"
-                        bsStyle="info"
-                        onClick={this.postNewRestaurant}>
-                        <Glyphicon
-                                glyph="floppy-disk" /> Save Restaurant Information</Button>
+                    <Col xs={12} md={6}>
+                        <Col xs={12}>
+                            <FormGroup>
+                                <ControlLabel>Restaurant Name</ControlLabel>
+                                <FormControl
+                                    id="restaurantName"
+                                    type="text"
+                                    onChange={this.restaurantNameChanged}
+                                    value={newRestaurant.restaurantName}
+                                placeholder="Little Italy" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12}>
+                            <FormGroup>
+                                <ControlLabel>Address</ControlLabel>
+                                <FormControl
+                                    id="address"
+                                    type="text" 
+                                    onChange={this.addressChanged}
+                                    value={newRestaurant.address}
+                                    placeholder="123 Restaurant Way" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12} md={4}>
+                            <FormGroup>
+                                <ControlLabel>City</ControlLabel>
+                                <FormControl
+                                    id="city"       
+                                    type="text"
+                                    onChange={this.cityChanged}
+                                    value={newRestaurant.city}
+                                    placeholder="New York City" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12} md={4}>
+                            <FormGroup>
+                                <ControlLabel>State</ControlLabel>
+                                <FormControl onChange={this.stateAbbrIdChanged} componentClass="select" placeholder="select">
+                                    <option value="select">Choose the State</option>
+                                {stateAbbrs}
+                                </FormControl>
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12} md={4}>
+                            <FormGroup>
+                                <ControlLabel>Zip Code</ControlLabel>
+                                <FormControl
+                                    id="zipCode"
+                                    type="text"
+                                    onChange={this.zipCodeChanged}
+                                    value={newRestaurant.zipCode}
+                                    placeholder="Zip Code" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12}>
+                            <FormGroup>
+                                <ControlLabel>Phone</ControlLabel>
+                                <FormControl
+                                    id="telephone"
+                                    type="text"
+                                    onChange={this.telephoneChanged}
+                                    value={newRestaurant.telephone}
+                                    placeholder="5558889999 - no dashes please" />
+                            </FormGroup>
+                        </Col>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Col xs={12}>
+                            <FormGroup>
+                                <ControlLabel>Website</ControlLabel>
+                                <FormControl
+                                    id="website"
+                                    type="text"
+                                    onChange={this.websiteChanged}
+                                    value={newRestaurant.website}
+                                    placeholder="www.littleitaly1.com" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12}>
+                            <FormGroup>
+                                <ControlLabel>Type of Cuisine</ControlLabel>
+                                <FormControl
+                                    id="foodGenre"
+                                    onChange={this.foodGenreIdChanged}
+                                    componentClass="select"
+                                    placeholder="select">
+                                    <option value="select">Choose the Type of Cuisine</option>
+                                    {foodGenres}
+                                </FormControl>
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12}>
+                            <FormGroup>
+                                <ControlLabel>Open Status</ControlLabel>
+                                <div className="radio-line">
+                                    <Radio
+                                        className="radio-background"
+                                        value="true"
+                                        onChange={this.openStatusChanged}
+                                        name="radioGroup"
+                                        inline>Open</Radio>
+                                    <Radio
+                                        className="radio-background"
+                                        value="false"
+                                        onChange={this.openStatusChanged}
+                                        name="radioGroup"
+                                        inline>Permanently Closed</Radio>
+                                 </div>
+                            </FormGroup>
+                        </Col>
+                        <Col xs={12}>
+                            <FormGroup controlId="formControlsTextarea">
+                                <ControlLabel>Notes</ControlLabel>
+                                <FormControl
+                                    id="notes"
+                                    value={newRestaurant.notes}
+                                    onChange={this.notesChanged}
+                                    componentClass="textarea"
+                                    placeholder="Great atmosphere, lively and fun" />
+                            </FormGroup>
+                         </Col>
+                    </Col>
+                    <div className="form-button-container">
+                        <Button
+                       
+                            type="submit"
+                            bsStyle="info"
+                            onClick={this.postNewRestaurant}>
+                            <Glyphicon glyph="floppy-disk" /> Save Restaurant Information
+                        </Button>
+                    </div>
                 </form>
             </div>
         );

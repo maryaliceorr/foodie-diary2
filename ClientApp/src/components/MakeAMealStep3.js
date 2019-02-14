@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Alert, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
+import { Col, Alert, Button, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import courseCalls from '../DBRequests/courseCalls';
 import dishTypeCalls from '../DBRequests/dishTypeCalls';
@@ -31,8 +31,7 @@ export class MakeAMealStep3 extends Component {
     closeAlert = () => {
         const emptyAlert = {
             show: false,
-            spotName: "",
-            tripName: "",
+            
         }
         this.setState({ alert: emptyAlert });
     }
@@ -49,17 +48,17 @@ export class MakeAMealStep3 extends Component {
         mealid: '',
         selectedFile: null,
         newDish: {
-            dishName: '',
-            courseId: '',
-            dishTypeId: '',
-            ingredient: '',
+            dishName: 'Plum Pork',
+            courseId: '6',
+            dishTypeId: '13',
+            ingredient: 'plum, pork, haricort verts, lemon zest, , wine, salt, sugar, potatoes, cream, butter ',
             picture: '',
-            appearance: '',
-            aroma: '',
-            creativity: '',
-            taste: '',
-            description: '',
-            price: '',
+            appearance: '3',
+            aroma: '4',
+            creativity: '5',
+            taste: '4',
+            description: 'marinated tenderloin medallions finished with savory plum sauce of mashed potatoes and french green beans',
+            price: '19.95',
             mealId: '',
         },
         newDishes: [],
@@ -166,9 +165,9 @@ export class MakeAMealStep3 extends Component {
         let alertStuff = undefined;
         if (this.state.alert.show) {
             alertStuff = (<Alert
-                bsStyle="success"
+                bsStyle="danger"
                 onDismiss={this.closeAlert}
-                className="text-center">test alert</Alert>)
+                className="text-center">Congrats! You added a dish to your meal.</Alert>)
         }
 
         const { newDish } = this.state;
@@ -194,8 +193,9 @@ export class MakeAMealStep3 extends Component {
         return (
             <div>
                 <h1>Step 3: Add Your Dishes</h1>
-                <div>{alertStuff}</div>
+                <div>
                 <form>
+                    <Col xs={12} md={6}>
                     <FormGroup>
                         <ControlLabel>Dish Name</ControlLabel>
                         <FormControl
@@ -234,7 +234,7 @@ export class MakeAMealStep3 extends Component {
                             id="ingredient"
                             value={newDish.ingredient}
                             onChange={this.ingredientChanged} />
-                    </FormGroup>
+                        </FormGroup>
                     <FormGroup controlId="formControlsTextarea">
                         <ControlLabel>Description</ControlLabel>
                         <FormControl
@@ -243,8 +243,11 @@ export class MakeAMealStep3 extends Component {
                             id="description"
                             value={newDish.description}
                             onChange={this.descriptionChanged} />
-                    </FormGroup>
+                        </FormGroup>
+                    </Col>
+                    <Col xs={12} md={6}>
                     <FormGroup>
+                         <ControlLabel>Price</ControlLabel>
                         <InputGroup>
                             <InputGroup.Addon>$</InputGroup.Addon>
                             <FormControl
@@ -295,27 +298,36 @@ export class MakeAMealStep3 extends Component {
                         />
                     </FormGroup>
 
-                    <FileUploader
+                        <FileUploader
+                        className="image-button"
                         accept="image/*"
                         name="avatar"
                         randomizeFilename
                         storageRef={firebase.storage().ref("images")}
                         onUploadSuccess={this.handleUploadSuccess}
-                    />
+                        />
+                    </Col>
                 </form>
-
-                <Button
+                </div>
+                <Col xs={12} md={12}>
+                    <div>{alertStuff}</div>
+                <div className="form-button-container">
+                        <Button
+                    className="step3-button"
                     type="submit"
                     bsStyle="info"
                     onClick={this.postNewDish}>
                     <Glyphicon
                         glyph="floppy-disk" /> Save Dish Information</Button>
-                <Link to={`/newmeal/${this.state.mealid}`}>
+                     <Link to={`/newmeal/${this.state.mealid}`}>
                     <Button
-                        bsStyle="info">
-                        I'm done. Go to my Meal.
+                        className="step3-button"
+                        bsStyle="warning">
+                        <Glyphicon glyph="cutlery"/> I'm done. Go to my Meal.
                         </Button>
-                </Link>
+                    </Link>
+                    </div>
+                    </Col>
             </div>
 
         );

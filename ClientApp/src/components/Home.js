@@ -214,7 +214,7 @@ export class Home extends Component {
         });
 
         return (
-            <div>
+            <div className="Home">
                 <h1 className="total-title">My Top Dishes</h1>
                 <div className="tcontainer">
                     <div className="ticker-wrap total-wrap">

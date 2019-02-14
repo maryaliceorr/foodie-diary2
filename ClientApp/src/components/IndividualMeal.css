@@ -11,25 +11,36 @@
 }
 
 .aroma-stars {
-    color: red;
+    color: #e10000;
 }
 
 .appearance-stars {
     color: #f9cf11;
+
 }
 
 .creativity-stars {
     color: darkgreen;
+
 }
 
 .taste-stars {
     color: darkblue;
+
 }
 
 .total-stars {
     color: black;
+
 }
 
 .phone {
     border: none;
+    background-color: none;
+    text-align: center;
+}
+
+.stars-container {
+    text-align: center;
+    font-size: 24px;
 }

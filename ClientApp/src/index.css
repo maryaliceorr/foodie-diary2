@@ -4,13 +4,17 @@
         padding-top: 50px;
         font-family: 'Josefin Slab', serif;
     }
+
 }
 
 h1 {
-    margin-top: 75px;
+    padding-top: 100px;
     text-align: center;
+    padding-bottom: 20px;
 }
 
-h2{
-
+#root {
+    padding: 0;
 }
+
+

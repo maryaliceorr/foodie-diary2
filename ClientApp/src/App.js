@@ -10,6 +10,7 @@ import { NewMeal } from './components/NewMeal';
 import { IndividualMeal } from './components/IndividualMeal';
 import { IndividualDish } from './components/IndividualDish';
 import { ImageHandler } from './components/ImageHandler';
+import { SplashPage } from './components/SplashPage';
 import fbconnection from './firebaseRequests/connection';
 
 fbconnection();
@@ -19,8 +20,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <Layout>
-            <Route exact path='/' component={Home} />
+        <Layout>
+            <Route exact path='/' component={SplashPage} />
+            <Route exact path='/home' component={Home} />
             <Route path='/makeameal' component={MakeAMeal} />
             <Route path='/mymeals' component={Meals} />
             <Route path='/step3/:mealid' component={MakeAMealStep3} />
@@ -29,6 +31,7 @@ export default class App extends Component {
             <Route path='/individualmeal/:individualmealid' component={IndividualMeal} />
             <Route path='/individualdish/:individualdishid' component={IndividualDish} />
             <Route path='/imagehandler' component={ImageHandler} />
+            <Route path='/splash' component={SplashPage}/>
       </Layout>
     );
   }

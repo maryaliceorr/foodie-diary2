@@ -26,10 +26,9 @@ export class Meals extends Component {
     render() {
         const mymeals = this.state.mymeals.map((mymeal) => {
             return (  
+                <div key={mymeal.id}>
                     <Col xs={12} md={4}>
-                    <div key={mymeal.id}>
-                        
-                            <Panel bsStyle="danger">
+                            <Panel className="mymeal-panel" bsStyle="info">
                                 <Panel.Heading>
                                     <Panel.Title componentClass="h3">{mymeal.mealName}</Panel.Title>
                                 </Panel.Heading>
@@ -45,24 +44,23 @@ export class Meals extends Component {
                                     <h5>{mymeal.mealTypeName}</h5>
 
                                 <Link to={`/individualmeal/${mymeal.id}`}>
-                                    <Button bsStyle="warning">View Meal</Button>
+                                    <Button bsStyle="danger">View Meal</Button>
                                 </Link>
                                 </Panel.Body>
                             </Panel>
-                       
-                        </div>
                     </Col>
+                </div>
+                
              );
         })
 
         return (
             <div>
-                <Row className="show-grid">
+                
                     <h1>My Meals</h1>
-                    <Row className="justify-content">
+                <div className="mymeals-container">
                         {mymeals}
-                    </Row>
-                </Row>
+                    </div>
             </div>
         );
     }
